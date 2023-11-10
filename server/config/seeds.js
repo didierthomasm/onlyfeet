@@ -31,7 +31,7 @@ const products = await Product.insertMany ([
         description: 'Elegance; woof said',
         image: '',
         category: categories[0]._id,
-        price: 2000,
+        price: 2001,
         quantity: 500,
     },
     {
