@@ -1,0 +1,29 @@
+[
+  {
+      "userId": "507f191e810c19729de860ea",
+      "firstName": "John",
+      "lastName": "Doe",
+      "username": "johndoe",
+      "email": "johndoe@example.com",
+      "password": "password123",
+      "userRole": 0
+  },
+  {
+      "userId": "507f191e810c19729de860eb",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "username": "janesmith",
+      "email": "janesmith@example.com",
+      "password": "securePass1",
+      "userRole": 1
+  },
+  {
+      "userId": "507f191e810c19729de860ec",
+      "firstName": "Alice",
+      "lastName": "Johnson",
+      "username": "alicejohnson",
+      "email": "alicejohnson@example.com",
+      "password": "alice12345",
+      "userRole": 2
+  }
+]
