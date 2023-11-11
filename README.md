@@ -1,8 +1,8 @@
-# onlyfeets
+# onlyfeet
 
-Welcome to *onlyfeets* - the premier platform for buying and selling feet photos online. Our secure and user-friendly service allows content creators (sellers) to connect with buyers, offering both subscription-based access and personalized photo requests.
+Welcome to *onlyfeet* - the premier platform for buying and selling feet photos online. Our secure and user-friendly service allows content creators (sellers) to connect with buyers, offering both subscription-based access and personalized photo requests.
 
-<img src="./assets/img/readme-cover.jpg">
+<img src="./client/src/assets/img/Logos/patas-feas-fondo.jpg" alt="logo">
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -22,7 +22,7 @@ Welcome to *onlyfeets* - the premier platform for buying and selling feet photos
 
 ## Introduction
 
-_onlyfeets_ is a dedicated platform for e-commerce that specializes in the niche of feet photography. This platform provides dual interfaces for both buyers and sellers, with a variety of subscription plans and the option for buyers to request personalized photos from sellers.
+_Onlyfeet_ is a dedicated platform for e-commerce that specializes in the niche of feet photography. This platform provides dual interfaces for both buyers and sellers, with a variety of subscription plans and the option for buyers to request personalized photos from sellers.
 
 ## Features
 
@@ -43,13 +43,13 @@ _onlyfeets_ is a dedicated platform for e-commerce that specializes in the niche
 
 ## Getting Started
 
-To get started with _onlyfeets_, clone the repository to your local machine:
+To get started with _onlyfeet_, clone the repository to your local machine:
 
-    git clone https://github.com/yourgithub/onlyfeets.git
+    git clone https://github.com/didierthomasm/onlyfeet.git
 
 Navigate to the project directory and install dependencies:
 
-    cd onlyfeets
+    cd onlyfeet
     npm install
 
 ## Usage
@@ -68,7 +68,7 @@ The admin dashboard provides comprehensive insights into sales and user metrics,
 
 ## Progressive Web App
 
-_onlyfeets_ is designed as a Progressive Web App (PWA), offering offline capabilities and app-like experiences.
+_onlyfeet_ is designed as a Progressive Web App (PWA), offering offline capabilities and app-like experiences.
 
 ## Mobile-Friendly
 
@@ -76,7 +76,7 @@ The user interface is optimized for mobile devices, ensuring a seamless experien
 
 ## Team
 
-_onlyfeets_ is developed by a dedicated team of six professionals with expertise in full-stack development, UI/UX design, and e-commerce.
+_onlyfeet_ is developed by a dedicated team of six professionals with expertise in full-stack development, UI/UX design, and e-commerce.
 
 ## Security
 
@@ -84,12 +84,12 @@ We prioritize the security of our users. All data is handled with strict adheren
 
 ## Contributing
 
-As a private, non-open-source project, _onlyfeets_ does not accept contributions from outside the development team.
+As a private, non-open-source project, _onlyfeet_ does not accept contributions from outside the development team.
 
 ## License
 
-_onlyfeets_ is proprietary software. All rights reserved.
+_onlyfeet_ is proprietary software. All rights reserved.
 
 ## Contact
 
-For any inquiries, please reach out to our support team at support@onlyfeets.com.
+For any inquiries, please reach out to our support team at support@onlyfeet.com.
