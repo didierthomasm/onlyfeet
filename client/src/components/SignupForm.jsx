@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Eye, EyeClose } from '@styled-icons/remix-line';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
-  Main,
+  MainWrapper,
   Form,
   Title,
   Input,
@@ -13,9 +13,9 @@ import {
   NotLoggedIn,
   NotLoggedInSpan,
   ButtonLink,
-} from "../assets/style/Login-Signup/Login-Singup.js";
+} from "../assets/style/Login-Signup-Forms/Login-Singup.js";
 
-export function Signup() {
+export function SignupForm({setIsLoggedIn}) {
   // State hooks for input values
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,9 +30,19 @@ export function Signup() {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  // Function to navigate to home page
+  const navigate = useNavigate();
+
+  // Function to handle signup
+  const handleSignup = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(true);
+    navigate('/')
+  };
+
   return (
-    <Main>
-      <Form name={'signupForm'}>
+    <MainWrapper>
+      <Form name={'signupForm'} onSubmit={handleSignup}>
         <Title>Sign Up</Title>
         <Input type="text" placeholder="Name" value={name} name={'name'} autoComplete={'name'}
                onChange={e => setName(e.target.value)} required />
@@ -49,16 +59,17 @@ export function Signup() {
           </TogglePasswordVisibility>
         </InputWrapper>
         <Button type="submit" disabled={isDisabled}>Login</Button>
+
+        {/*Section if the user already has an account*/}
         <NotLoggedIn>
           <NotLoggedInSpan>
             <span>Already have an account?</span>
             <ButtonLink onClick={(e) => {
               e.preventDefault()
-
             }}><Link to={'/login'}>Login</Link></ButtonLink>
           </NotLoggedInSpan>
         </NotLoggedIn>
       </Form>
-    </Main>
+    </MainWrapper>
   );
 }

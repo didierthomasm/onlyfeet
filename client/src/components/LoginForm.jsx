@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Eye, EyeClose } from '@styled-icons/remix-line';
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {
-  Main,
+  MainWrapper,
   Form,
   Title,
   Input,
@@ -18,9 +18,9 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../assets/style/Login-Signup/Login-Singup.js";
+} from "../assets/style/Login-Signup-Forms/Login-Singup.js";
 
-export function Login() {
+export function LoginForm({setIsLoggedIn}) {
   // State hooks for input values
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,9 +38,19 @@ export function Login() {
   // Function to toggle modal visibility
   const toggleModal = () => setShowModal(!showModal);
 
+  // Function to navigate to home page
+  const navigate = useNavigate();
+
+  // Function to handle login
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(true);
+    navigate('/')
+  };
+
   return (
-    <Main>
-      <Form name={'loginForm'}>
+    <MainWrapper>
+      <Form name={'loginForm'} onSubmit={handleLogin}>
         <Title>Login</Title>
         <Input type="email" placeholder="Email" value={email} name={'email'} autoComplete={'email'}
                onChange={e => setEmail(e.target.value)} required />
@@ -55,14 +65,18 @@ export function Login() {
           </TogglePasswordVisibility>
         </InputWrapper>
         <Button type="submit" disabled={isDisabled}>Login</Button>
+
+        {/*Section if the user doesn't have an account*/}
         <NotLoggedIn>
           <NotLoggedInSpan>
             <span>Don't have an account?</span>
             <ButtonLink onClick={(e) => {
               e.preventDefault()
-
             }}><Link to={'/signup'}>Sign up</Link></ButtonLink>
           </NotLoggedInSpan>
+          {/*End of section if the user doesn't have an account*/}
+
+          {/*Section if the user forgot the password*/}
           <NotLoggedInSpan>
             <ButtonLink onClick={(e) => {
               e.preventDefault()
@@ -70,7 +84,10 @@ export function Login() {
             }}>Forgot password?</ButtonLink>
           </NotLoggedInSpan>
         </NotLoggedIn>
+        {/*End of section if the user forgot the password*/}
       </Form>
+
+      {/*Modal for forgot password*/}
       {showModal && (
         <ModalBackdrop onClick={toggleModal}> {/* Clicking on the backdrop will close the modal */}
           <ModalContainer onClick={e => e.stopPropagation()}> {/* Stops click from propagating to the backdrop */}
@@ -86,6 +103,7 @@ export function Login() {
           </ModalContainer>
         </ModalBackdrop>
       )}
-    </Main>
+      {/*End of modal for forgot password*/}
+    </MainWrapper>
   );
 }
