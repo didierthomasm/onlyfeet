@@ -5,8 +5,8 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import App from './App.jsx'
 import {Home} from "./pages/Home.jsx";
 import ErrorPage from "./pages/Error.jsx";
-import {Login} from "./pages/Login.jsx";
-import {Signup} from "./pages/Signup.jsx";
+import {LoginSignup} from "./pages/LoginSignup.jsx";
+import {Profile} from "./pages/Profile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,12 +20,16 @@ const router = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <Login />
+        element: <LoginSignup />
       },
       {
         path: 'signup',
-        element: <Signup />
+        element: <LoginSignup />
       },
+      {
+        path: 'profile',
+        element: <Profile />
+      }
     ]
   }
 ])
