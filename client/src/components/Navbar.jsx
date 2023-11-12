@@ -45,7 +45,7 @@ export function Navbar() {
       <ul>
         {section.map((item) => {
           return (
-            <li>
+            <li key={item.name}>
               <NavLink to={item.path} className={({isActive}) => (isActive ? 'active' : '')}>
                 {item.icon}
                 {item.iconActive}
