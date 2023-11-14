@@ -48,7 +48,7 @@ const userSchema = new Schema({
     },
     subscribedTo: [{
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Subscription'
     }],
     content: [{
         type: Schema.Types.ObjectId,
