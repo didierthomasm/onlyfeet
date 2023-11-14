@@ -1,17 +1,21 @@
-import logo from '../assets/img/Logos/patas-feas-fondo-circle.png'
+import logo from '../assets/img/Logos/logo-letters.png'
 import {Navbar} from "./Navbar.jsx";
 import styled from "styled-components";
 
-const Image = styled.img`
-  width: 100px;
-  height: 100px;
-`
-
 const MainHeader = styled.header`
   display: flex;  
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
-  padding: 0 1rem;
+  position: sticky;
+  width: 8rem;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #F8F8F8;
+`
+
+const Image = styled.img`
+  width: 6.25rem;
 `
 
 export function Header() {
