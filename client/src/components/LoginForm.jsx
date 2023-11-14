@@ -18,7 +18,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../assets/style/Login-Signup-Forms/Login-Singup.js";
+} from "../assets/style/Login-Signup-Forms/Login-SingupStyle.js";
 
 export function LoginForm({setIsLoggedIn}) {
   // State hooks for input values

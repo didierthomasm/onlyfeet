@@ -13,7 +13,7 @@ import {
   NotLoggedIn,
   NotLoggedInSpan,
   ButtonLink,
-} from "../assets/style/Login-Signup-Forms/Login-Singup.js";
+} from "../assets/style/Login-Signup-Forms/Login-SingupStyle.js";
 
 export function SignupForm({setIsLoggedIn}) {
   // State hooks for input values
