@@ -1,29 +1,38 @@
 [
-  {
-      "userId": "507f191e810c19729de860ea",
-      "firstName": "John",
-      "lastName": "Doe",
-      "username": "johndoe",
-      "email": "johndoe@example.com",
-      "password": "password123",
-      "userRole": 0
-  },
-  {
-      "userId": "507f191e810c19729de860eb",
-      "firstName": "Jane",
-      "lastName": "Smith",
-      "username": "janesmith",
-      "email": "janesmith@example.com",
-      "password": "securePass1",
-      "userRole": 1
-  },
-  {
-      "userId": "507f191e810c19729de860ec",
-      "firstName": "Alice",
-      "lastName": "Johnson",
-      "username": "alicejohnson",
-      "email": "alicejohnson@example.com",
-      "password": "alice12345",
-      "userRole": 2
-  }
+    {
+        "userId": "507f191e810c19729de860ea",
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "johndoe@example.com",
+        "password": "password123",
+        "role": "creator",
+        "created_at": "2023-11-13",
+        "credits": "100",
+        "subscribedTo": "1,2",
+        "content": "1"
+    },
+    {
+        "userId": "507f191e810c19729de860eb",
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "email": "janesmith@example.com",
+        "password": "securePass1",
+        "role": "follower",
+        "created_at": "2023-11-13",
+        "credits": "300",
+        "subscribedTo": "3,5",
+        "content": ""
+    },
+    {
+        "userId": "507f191e810c19729de860ec",
+        "firstName": "Alice",
+        "lastName": "Johnson",
+        "email": "alicejohnson@example.com",
+        "password": "alice12345",
+        "role": "follower",
+        "created_at": "2023-11-13",
+        "credits": "800",
+        "subscribedTo": "1,2,4",
+        "content": ""
+    }
 ]

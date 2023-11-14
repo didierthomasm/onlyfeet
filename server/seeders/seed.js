@@ -1,22 +1,22 @@
 const db = require('../config/connection');
-const { User} = require('../models'); //ahorita no ocupo Product y Category
+const { User } = require('../models'); //ahorita no ocupo Product y Category
 const userSeeds = require('./userSeeds.json');
 const cleanDB = require('./cleanDB');
 
 db.once('open', async () => {
-  try {
+    try {
 
-    await cleanDB('User', 'users');
+        await cleanDB('User', 'users');
 
-    await User.create(userSeeds);
+        await User.create(userSeeds);
 
-  } catch (err) {
-    console.error(err);
-    process.exit(1);
-  }
+    } catch (err) {
+        console.error(err);
+        process.exit(1);
+    }
 
-  console.log('all done!');
-  process.exit(0);
+    console.log('all done!');
+    process.exit(0);
 });
 
 
