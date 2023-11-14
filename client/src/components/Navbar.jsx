@@ -31,7 +31,7 @@ const section = [{
   name: 'Earn',
   icon: <Earn className="inactive-icon" size={32}/>,
   iconActive: <EarnFill className="active-icon" size={32}/>,
-  path: '/deposit'
+  path: '/earnings'
 }, {
   name: 'Contact',
   icon: <Contact className="inactive-icon" size={32}/>,
