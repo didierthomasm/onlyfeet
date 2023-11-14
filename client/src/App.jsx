@@ -4,6 +4,7 @@ import GlobalStyle from "../src/assets/style/GlobalStyle"
 import {Footer} from "./components/Footer.jsx";
 import {Header} from "./components/Header.jsx";
 
+
 function App() {
   return (
     <div>

@@ -1,7 +1,26 @@
-const db = require('./connection');
-const { User, Product, Category} = require('../models');
+const db = require('../config/connection');
+const { User} = require('../models'); //ahorita no ocupo Product y Category
+const userSeeds = require('./userSeeds.json');
+const cleanDB = require('./cleanDB');
 
-db.once('open', async() => {
+db.once('open', async () => {
+  try {
+
+    await cleanDB('User', 'users');
+
+    await User.create(userSeeds);
+
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+
+  console.log('all done!');
+  process.exit(0);
+});
+
+
+/*db.once('open', async() => {
     await Category.deleteMany();
 
 const categories = await Category.insertMany ([
@@ -58,3 +77,4 @@ const products = await Product.insertMany ([
 
 
 })
+*/
