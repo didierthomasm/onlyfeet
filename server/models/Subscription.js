@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const subscriptionSchema = new Schema({
-
+    subscriptionId: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        unique: true
+    },
     follower: {
         type: Schema.Types.ObjectId,
         ref: 'User',
