@@ -9,7 +9,7 @@ import {LoginSignup} from "./pages/LoginSignup.jsx";
 import {Profile} from "./pages/Profile.jsx";
 import {Pay} from "./pages/Pay.jsx";
 import {Earn} from "./pages/Earn.jsx";
-import {Contact} from "./pages/Contact.jsx";
+import Help from "./pages/Help.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,8 +42,8 @@ const router = createBrowserRouter([
         element: <Earn />
       },
       {
-        path: 'contact',
-        element: <Contact />
+        path: 'help',
+        element: <Help />
       },
     ]
   }
