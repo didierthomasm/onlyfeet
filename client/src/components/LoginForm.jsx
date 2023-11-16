@@ -18,7 +18,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from "../assets/style/Login-Signup-Forms/Login-Singup.js";
+} from "../assets/style/Login-Signup-Forms/Login-SingupStyle.js";
 
 export function LoginForm({setIsLoggedIn}) {
   // State hooks for input values
@@ -56,6 +56,7 @@ export function LoginForm({setIsLoggedIn}) {
                onChange={e => setEmail(e.target.value)} required />
         <InputWrapper>
           <PasswordInput type={isPasswordVisible ? 'text' : 'password'} placeholder="Password" value={password}
+                         name={'password'} autoComplete={'current-password'}
                  onChange={e => setPassword(e.target.value)} required />
           <TogglePasswordVisibility onClick={e => {
             e.preventDefault()

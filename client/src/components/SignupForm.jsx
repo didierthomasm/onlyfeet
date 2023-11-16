@@ -13,7 +13,7 @@ import {
   NotLoggedIn,
   NotLoggedInSpan,
   ButtonLink,
-} from "../assets/style/Login-Signup-Forms/Login-Singup.js";
+} from "../assets/style/Login-Signup-Forms/Login-SingupStyle.js";
 
 export function SignupForm({setIsLoggedIn}) {
   // State hooks for input values
@@ -50,6 +50,7 @@ export function SignupForm({setIsLoggedIn}) {
                onChange={e => setEmail(e.target.value)} required />
         <InputWrapper>
           <PasswordInput type={isPasswordVisible ? 'text' : 'password'} placeholder="Password" value={password}
+
                          onChange={e => setPassword(e.target.value)} required />
           <TogglePasswordVisibility onClick={e => {
             e.preventDefault()

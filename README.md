@@ -2,7 +2,7 @@
 
 Welcome to *onlyfeet* - the premier platform for buying and selling feet photos online. Our secure and user-friendly service allows content creators (sellers) to connect with buyers, offering both subscription-based access and personalized photo requests.
 
-<img src="./client/src/assets/img/Logos/patas-feas-fondo.jpg" alt="logo">
+<img src="./client/src/assets/img/Logos/logo-letters-bgwhite.png" alt="logo">
 
 ## Table of Contents
 1. [Introduction](#introduction)
