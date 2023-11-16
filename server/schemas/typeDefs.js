@@ -32,7 +32,7 @@ type Query {
 }
 
 type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!, role: Int, created_at: String, credits: Int): Auth
+    addUser(firstName: String!, lastName: String!, email: String!, username: String!, password: String!, role: Int, created_at: String, credits: Int): Auth
     addSubscription(follower: Int!, creator: Int!, startDate: String, endDate: String, isActive: Boolean, subscriptionType: String): Subscription
     login(email: String!, password: String!): Auth
     removeUser: User
