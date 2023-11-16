@@ -14,6 +14,16 @@ type Auth {
     user: User
 }
 
+type Subscription {
+    _id: ID
+    follower: Int!
+    creator: Int!
+    startDate: String
+    endDate: String
+    isActive: Boolean
+    subscriptionType: String
+}
+
 type Query {
     users: [User]!
     user(userId: ID!): User
@@ -22,8 +32,8 @@ type Query {
 }
 
 type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!, role: Int, created_at: Date, credits: Int): Auth
-    addSubscription(follower: Int!, creator: Int!, startDate: Date, endDate: Date, isActive: Boolean, subscriptionType: String)
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!, role: Int, created_at: String, credits: Int): Auth
+    addSubscription(follower: Int!, creator: Int!, startDate: String, endDate: String, isActive: Boolean, subscriptionType: String): Subscription
     login(email: String!, password: String!): Auth
     removeUser: User
 }
