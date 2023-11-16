@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
-import profilePic from "../assets/img/Profile+/profile-placeholder.png";
-import coverPic from "../assets/img/Profile+/cover-placeholder.png";
+import profilePic from "../assets/img/Profile+/JohnDoe/profile.png";
+import coverPic from "../assets/img/Profile+/JohnDoe/cover.png";
 
 export const GlobalContext = createContext({});
 
@@ -11,6 +11,7 @@ export const GlobalProvider = ({ children }) => {
     email: 'johndoe@test.cm',
     firstName: 'John',
     lastName: 'Doe',
+    birthday: '01/01/2000',
     bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
     profilePic: profilePic,
     coverPic: coverPic,
@@ -24,6 +25,7 @@ export const GlobalProvider = ({ children }) => {
     chats: [],
     groups: [],
     events: [],
+    credits: 0,
     createdAt: new Date(),
     updatedAt: new Date()
   });

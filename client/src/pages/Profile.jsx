@@ -1,5 +1,8 @@
 import {useContext, useState} from "react";
 
+import userPlaceholder from "../assets/img/Profile+/profile-placeholder.png";
+import coverPlaceholder from "../assets/img/Profile+/cover-placeholder.png";
+
 // Context
 import {GlobalContext} from "../context/GlobalState.jsx";
 
@@ -28,6 +31,13 @@ export function Profile() {
     bio: user.bio,
   });
 
+  // Handle null profile pictures
+  const profilePictures = {
+    userPic: user.profilePic || userPlaceholder,
+    coverPic: user.coverPic || coverPlaceholder,
+  } ;
+
+  // Handle edit button
   const handleEditToggle = () => {
     if (isEditing) {
       handleSave();
@@ -35,11 +45,13 @@ export function Profile() {
     setIsEditing(!isEditing);
   };
 
+  // Handle save button
   const handleSave = () => {
     updateProfile(editValues);
     setIsEditing(false);
   }
 
+  // Handle change in editable fields
   const handleChange = (name, value) => {
     setEditValues(prevValues => ({
       ...prevValues,
@@ -49,8 +61,8 @@ export function Profile() {
 
   return (
     <ProfileContainer>
-      <CoverPhoto src={user.coverPic} alt='Cover'/>
-      <ProfilePhoto src={user.profilePic} alt="Profile"/>
+      <CoverPhoto src={profilePictures.coverPic} alt='Cover'/>
+      <ProfilePhoto src={profilePictures.userPic} alt="Profile"/>
       <ProfileInfo>
         {isEditing ? (
           <>
