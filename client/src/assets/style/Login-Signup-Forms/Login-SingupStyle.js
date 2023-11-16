@@ -101,50 +101,6 @@ export const ButtonLink = styled.button`
   }
 `;
 
-export const Checkbox = styled.input.attrs({ type: "checkbox" })`
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  
-  &:checked {
-    background-color: cornflowerblue;
-  }
-  
-  &:checked:after {
-    content: "✔";
-    font-size: 1.5rem;
-    color: white;
-    position: absolute;
-    top: -2px;
-    left: 3px;
-  }
-  
-/*  &:after {
-    content: "I confirm that I am 18 years of age or older and I agree to the Terms and Conditions. 
-    By checking this box, I acknowledge that I have read, understand, 
-    and accept all terms and conditions set forth by this website. 
-    I understand that providing false information regarding my age may result in the termination of 
-    my account and possible legal consequences.";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-  }*/
-`;
-
-export const CheckboxLabel = styled.label`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  
-  &:hover {
-    text-decoration: underline;
-  }  
-`;
-
 export const ModalBackdrop = styled.div`
   position: fixed;
   top: 0;

@@ -73,7 +73,7 @@ export function LoginForm({setIsLoggedIn}) {
             <span>Don't have an account?</span>
             <ButtonLink onClick={(e) => {
               e.preventDefault()
-            }}><Link to={'/signup'}>Sign up</Link></ButtonLink>
+            }}><Link to={'/signup'}>Sign Up</Link></ButtonLink>
           </NotLoggedInSpan>
           {/*End of section if the user doesn't have an account*/}
 
