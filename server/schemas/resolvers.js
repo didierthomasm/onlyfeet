@@ -65,29 +65,29 @@ const resolvers = {
             const user = await User.findOne({ email });
 
             if (!user) {
-                throw new AuthenticationError('No user found with this email address');
+                throw AuthenticationError;
             }
 
             const correctPw = await user.isCorrectPassword(password);
 
             if (!correctPw) {
-                throw new AuthenticationError('Incorrect password');
+                throw AuthenticationError;
             }
 
-            if (User.userRole != 0 || 1 || 2) {
-                console.log(User.userRole)
-                throw new AuthenticationError('Not authorized to view this content');
+            if (User.role !== 0 || 1 || 2) {
+                console.log(User.role)
+                throw AuthenticationError;
             }
 
             const token = signToken(user);
             return { token, user };
         },
 
-        removeUser: async (parent, args, context) => {
+        removeUser: (parent, args, context) => {
             if (context.user) {
-                return await User.findOneAndDelete({ _id: context.user._id });
+                return User.findOneAndDelete({_id: context.user._id});
             }
-            throw new AuthenticationError('Not authenticated');
+            throw AuthenticationError;
         }
     }
 };

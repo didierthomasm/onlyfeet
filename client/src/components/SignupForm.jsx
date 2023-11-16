@@ -10,9 +10,10 @@ import {
   TogglePasswordVisibility,
   InputWrapper,
   Button,
+  Checkbox,
   NotLoggedIn,
   NotLoggedInSpan,
-  ButtonLink,
+  ButtonLink, CheckboxLabel,
 } from "../assets/style/Login-Signup-Forms/Login-SingupStyle.js";
 
 export function SignupForm({setIsLoggedIn}) {
@@ -20,10 +21,11 @@ export function SignupForm({setIsLoggedIn}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [termsAndConditions, setTermsAndConditions] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   // Function to check if button should be disabled
-  const isDisabled = email === '' || password === '' || name === '';
+  const isDisabled = email === '' || password === '' || name === '' || termsAndConditions === true;
 
   // Function to handle password visibility
   const handlePasswordVisibility = () => {
@@ -59,8 +61,19 @@ export function SignupForm({setIsLoggedIn}) {
             {isPasswordVisible ? <Eye size={24} /> : <EyeClose size={24} />}
           </TogglePasswordVisibility>
         </InputWrapper>
+        <CheckboxLabel >
+        <Checkbox id={'termsAndConditions'} name={'termsAndConditions'} required
+                  onClick={() => setTermsAndConditions(!termsAndConditions)}
+        />
+        <label htmlFor={'termsAndConditions'}>
+          I confirm that I am 18 years of age or older and I agree to the Terms and Conditions.
+          By checking this box, I acknowledge that I have read, understand,
+          and accept all terms and conditions set forth by this website.
+          I understand that providing false information regarding my age may result in the termination
+          of my account and possible legal consequences.
+        </label>
+        </CheckboxLabel>
         <Button type="submit" disabled={isDisabled}>Login</Button>
-
         {/*Section if the user already has an account*/}
         <NotLoggedIn>
           <NotLoggedInSpan>
