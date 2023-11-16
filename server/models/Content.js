@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const contentSchema = new Schema({
-    contentId: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        unique: true
-    },
     title: {
         type: String,
         required: true,

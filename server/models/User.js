@@ -5,11 +5,6 @@ const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
-    userId: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        unique: true
-    },
     firstName: {
         type: String,
         required: true,
@@ -26,13 +21,17 @@ const userSchema = new Schema({
         unique: true,
         match: [/.+@.+\..+/, 'Must match an email address!'],
     },
-
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true
+    },
     password: {
         type: String,
         required: true,
         minlength: 8
     },
-
     role: {
         type: String,
         required: true,
