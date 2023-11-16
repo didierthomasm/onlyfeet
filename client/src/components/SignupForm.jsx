@@ -50,6 +50,7 @@ export function SignupForm({setIsLoggedIn}) {
                onChange={e => setEmail(e.target.value)} required />
         <InputWrapper>
           <PasswordInput type={isPasswordVisible ? 'text' : 'password'} placeholder="Password" value={password}
+
                          onChange={e => setPassword(e.target.value)} required />
           <TogglePasswordVisibility onClick={e => {
             e.preventDefault()

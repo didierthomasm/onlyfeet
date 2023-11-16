@@ -56,6 +56,7 @@ export function LoginForm({setIsLoggedIn}) {
                onChange={e => setEmail(e.target.value)} required />
         <InputWrapper>
           <PasswordInput type={isPasswordVisible ? 'text' : 'password'} placeholder="Password" value={password}
+                         name={'password'} autoComplete={'current-password'}
                  onChange={e => setPassword(e.target.value)} required />
           <TogglePasswordVisibility onClick={e => {
             e.preventDefault()
