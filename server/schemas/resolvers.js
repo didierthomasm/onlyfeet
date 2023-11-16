@@ -1,6 +1,7 @@
 const { User, Content, Subscription } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
-console.log(User, `User=${User}`)
+const {DateTime} = require("./scalar");
+
 const resolvers = {
     Query: {
         users: async () => {
@@ -18,7 +19,6 @@ const resolvers = {
                 throw new Error('Error fetching user');
             }
         },
-
         subscriptions: async () => {
             try {
                 return await Subscription.find();
@@ -74,10 +74,10 @@ const resolvers = {
                 throw AuthenticationError;
             }
 
-            if (User.role !== 0 || 1 || 2) {
+/*            if (User.role !== 0 && User.role !== 1 && User.role !== 2) {
                 console.log(User.role)
                 throw AuthenticationError;
-            }
+            }*/
 
             const token = signToken(user);
             return { token, user };
@@ -89,7 +89,8 @@ const resolvers = {
             }
             throw AuthenticationError;
         }
-    }
+    },
+    DateTime: DateTime
 };
 
 module.exports = resolvers;

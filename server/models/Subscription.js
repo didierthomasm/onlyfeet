@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const { Schema, model } = require('mongoose');
 
 const subscriptionSchema = new Schema({
     follower: {
@@ -34,5 +33,5 @@ const subscriptionSchema = new Schema({
     // }
 });
 
-const Subscription = mongoose.model('Subscription', subscriptionSchema);
+const Subscription = model('Subscription', subscriptionSchema);
 module.exports = Subscription;
