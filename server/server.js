@@ -5,7 +5,7 @@ const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 const fileUpload = require('express-fileupload');
 const dotenv = require('dotenv');
-const { connectDB } = require('./config/db.js');
+//const { connectDB } = require('./config/db.js');
 const { errorHandler } = require('./middlewares/error.js');
 const cloudinary = require('./config/cloudinary.js');
 const uploadRoutes = require('./routes/upload.js');
@@ -56,7 +56,7 @@ const startApolloServer = async () => {
 
   db.once('open', () => {
     app.listen(PORT, () => {
-      connectDB();
+      //connectDB();
       console.log(`API server running on port ${PORT}!`);
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
