@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Eye, EyeClose } from '@styled-icons/remix-line';
 import { Link, useNavigate } from "react-router-dom";
+import TermsCheckbox from "./TermsCheckbox.jsx";
 import {
   MainWrapper,
   Form,
@@ -10,10 +11,9 @@ import {
   TogglePasswordVisibility,
   InputWrapper,
   Button,
-  Checkbox,
   NotLoggedIn,
   NotLoggedInSpan,
-  ButtonLink, CheckboxLabel,
+  ButtonLink,
 } from "../assets/style/Login-Signup-Forms/Login-SingupStyle.js";
 
 export function SignupForm({setIsLoggedIn}) {
@@ -21,11 +21,11 @@ export function SignupForm({setIsLoggedIn}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [termsAndConditions, setTermsAndConditions] = useState(false);
+  const [termsAndConditions, setTermsAndConditions] = useState(true);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   // Function to check if button should be disabled
-  const isDisabled = email === '' || password === '' || name === '' || termsAndConditions === true;
+  const isDisabled = email === '' || password === '' || name === '' || termsAndConditions === false;
 
   // Function to handle password visibility
   const handlePasswordVisibility = () => {
@@ -61,19 +61,11 @@ export function SignupForm({setIsLoggedIn}) {
             {isPasswordVisible ? <Eye size={24} /> : <EyeClose size={24} />}
           </TogglePasswordVisibility>
         </InputWrapper>
-        <CheckboxLabel >
-        <Checkbox id={'termsAndConditions'} name={'termsAndConditions'} required
-                  onClick={() => setTermsAndConditions(!termsAndConditions)}
+        <TermsCheckbox
+          termsAndConditions={termsAndConditions}
+          setTermsAndConditions={setTermsAndConditions}
         />
-        <label htmlFor={'termsAndConditions'}>
-          I confirm that I am 18 years of age or older and I agree to the Terms and Conditions.
-          By checking this box, I acknowledge that I have read, understand,
-          and accept all terms and conditions set forth by this website.
-          I understand that providing false information regarding my age may result in the termination
-          of my account and possible legal consequences.
-        </label>
-        </CheckboxLabel>
-        <Button type="submit" disabled={isDisabled}>Login</Button>
+        <Button type="submit" disabled={isDisabled}>Sign Up</Button>
         {/*Section if the user already has an account*/}
         <NotLoggedIn>
           <NotLoggedInSpan>

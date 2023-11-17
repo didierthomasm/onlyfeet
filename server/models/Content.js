@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const { Schema, model } = require('mongoose');
 
 const contentSchema = new Schema({
     title: {
@@ -28,5 +27,5 @@ const contentSchema = new Schema({
     }
 });
 
-const Content = mongoose.model('Content', contentSchema);
+const Content = model('Content', contentSchema);
 module.exports = Content;
