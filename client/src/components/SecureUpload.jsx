@@ -20,7 +20,7 @@ const SecureUpload = () => {
 
     try {
 
-      const res = await axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/${folder}/upload`, data,{
+      const res = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_APP_CLOUDINARY_CLOUD_NAME}/${folder}/upload`, data,{
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -36,7 +36,7 @@ const SecureUpload = () => {
         response: res.data
       }
 
-      const serverRes = await axios.post(`${process.env.REACT_APP_BACKEND_BASEURL}/api/upload`, uploadData);
+      const serverRes = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/upload`, uploadData);
 
       return serverRes;
     } catch (error) {
@@ -47,7 +47,7 @@ const SecureUpload = () => {
 
   const getSignatureForUpload = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_BACKEND_BASEURL}/api/sign-upload`);
+      const res = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/sign-upload`);
       return res.data;
     } catch (error) {
       console.error(error);

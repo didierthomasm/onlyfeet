@@ -3,6 +3,7 @@ import axios from 'axios';
 import {TailSpin} from 'react-loader-spinner'
 
 
+
 const Upload = ()=> {
 
 const [img, setImg] =useState(null);
@@ -15,10 +16,11 @@ const uploadFile=async(type)=>{
     data.append("upload_preset", type ==='image'?'images_preset':'videos_preset');
 
     try{
-        let cloudName=process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
-        console.log(process.env.REACT_APP_CLOUDINARY_CLOUD_NAME)
+        let cloudName=import.meta.env.VITE_APP_CLOUDINARY_CLOUD_NAME;
+        console.log(import.meta.env.VITE_APP_CLOUDINARY_CLOUD_NAME)
         let resourceType=type==='image'?'image':'video';
         let api = `https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`;
+        console.log(cloudName)
 
         const res = await axios.post(api, data);
         const {secure_url}=res.data;
@@ -41,7 +43,7 @@ const handleSubmit =async (e)=>{
         const videoUrl=await uploadFile('video');
 
         //mandar backend api request
-        await axios.post(`${process.env.REACT_APP_BACKEND_BASEURL}/api/videos`,{imgUrl, videoUrl})
+        await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/videos`,{imgUrl, videoUrl})
 
         //resetear
 
