@@ -3,6 +3,15 @@ const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+const fileUpload = require('express-fileupload');
+const dotenv = require('dotenv');
+const { connectDB } = require('./config/db.js');
+const { errorHandler } = require('./middlewares/error.js');
+const cloudinary = require('./config/cloudinary.js');
+const uploadRoutes = require('./routes/upload.js');
+const signUploadRoutes = require('./routes/sign-upload.js');
+
+dotenv.config({path:'./.env'})
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -25,6 +34,18 @@ const startApolloServer = async () => {
     context: authMiddleware
   }));
 
+  //estos app use son para cloudinary
+
+  app.use(fileUpload());
+  app.use(express.urlencoded({ extended: true }));
+
+  app.use(express.json());
+
+  app.use('/api/sign-upload', signUploadRoutes)
+  app.use('/api/upload', uploadRoutes)
+
+  app.use(errorHandler);
+
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
 
@@ -35,6 +56,7 @@ const startApolloServer = async () => {
 
   db.once('open', () => {
     app.listen(PORT, () => {
+      connectDB();
       console.log(`API server running on port ${PORT}!`);
       console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
     });
