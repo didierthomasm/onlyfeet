@@ -10,6 +10,9 @@ import {Profile} from "./pages/Profile.jsx";
 import {Pay} from "./pages/Pay.jsx";
 import {Earn} from "./pages/Earn.jsx";
 import Help from "./pages/Help.jsx";
+import SecureUpload from './components/SecureUpload.jsx';
+import Upload from './components/Upload.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -44,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: 'help',
         element: <Help />
+      },
+      {
+        path: 'upload',
+        element: <Upload/>
+      },
+      {
+        path: 'secure-upload',
+        element: <SecureUpload/>
       },
     ]
   }

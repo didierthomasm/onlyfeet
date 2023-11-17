@@ -1,4 +1,4 @@
-import {Outlet, useLocation} from "react-router-dom";
+import {Link, Outlet, useLocation} from "react-router-dom";
 import {useState} from "react";
 import {GlobalProvider} from "./context/GlobalState.jsx";
 
@@ -18,6 +18,8 @@ function App() {
   const location = useLocation();
   const isSignUpPage = location.pathname === '/signup';
 
+// el Link es sólo para prueba
+
   return (
     <>
       <GlobalStyle/>
@@ -25,6 +27,9 @@ function App() {
         {isLoggedIn ? (
           <AppContainer>
             <Header/>
+            <h1>Upload Files</h1>
+            <Link to="/">Home</Link>|<Link to="upload">Upload</Link>|<Link to="secure-upload">Secure Upload</Link>
+            <br/>
             <Outlet />
           </AppContainer>
         ) : (
