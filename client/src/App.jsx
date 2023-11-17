@@ -1,4 +1,4 @@
-import {Outlet, useLocation} from "react-router-dom";
+import {Link, Outlet, useLocation} from "react-router-dom";
 import {useState} from "react";
 import {ApolloClient, InMemoryCache, ApolloProvider, createHttpLink} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
@@ -46,7 +46,7 @@ function App() {
 
   const location = useLocation();
   const isSignUpPage = location.pathname === '/signup';
-
+//el link abajo de header es sólo para prueba
   return (
     <ApolloProvider client={client}>
       <GlobalStyle/>
@@ -54,6 +54,9 @@ function App() {
         {isLoggedIn ? (
           <AppContainer>
             <Header/>
+            <h1>Upload Files</h1>
+            <Link to="/">Home</Link>|<Link to="upload">Upload</Link>|<Link to="secure-upload">Secure Upload</Link>
+            <br/>
             <Outlet />
           </AppContainer>
         ) : (
