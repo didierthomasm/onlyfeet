@@ -48,9 +48,3 @@ export const GlobalProvider = ({ children }) => {
     </GlobalContext.Provider>
   );
 };
-
-export function GlobalState() {
-  return (
-    <></>
-  )
-}

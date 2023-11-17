@@ -1,10 +1,14 @@
+import React from 'react';
 import {Outlet, useLocation} from "react-router-dom";
-import {useState} from "react";
-import {ApolloClient, InMemoryCache, ApolloProvider, createHttpLink} from '@apollo/client';
+
+import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
+
 
 // Context
 import {GlobalProvider} from "./context/GlobalState.jsx";
+import {AuthProvider, useAuth} from "./context/AuthContext.jsx";
+
 
 // Styles
 import GlobalStyle from "../src/assets/style/GlobalStyle"
@@ -42,27 +46,29 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const {isAuthenticated} = useAuth();
 
   const location = useLocation();
   const isSignUpPage = location.pathname === '/signup';
 
   return (
     <ApolloProvider client={client}>
-      <GlobalStyle/>
-      <GlobalProvider>
-        {isLoggedIn ? (
-          <AppContainer>
-            <Header/>
-            <Outlet />
-          </AppContainer>
-        ) : (
-          <>
-            <LoginSignup setIsLoggedIn={setIsLoggedIn} mode={isSignUpPage ? 'signup' : 'login'}/>
-            <Footer/>
-          </>
-        )}
-      </GlobalProvider>
+      <AuthProvider>
+        <GlobalStyle/>
+        <GlobalProvider>
+          {isAuthenticated ? (
+            <AppContainer>
+              <Header/>
+              <Outlet/>
+            </AppContainer>
+          ) : (
+            <>
+              <LoginSignup mode={isSignUpPage ? 'signup' : 'login'}/>
+              <Footer/>
+            </>
+          )}
+        </GlobalProvider>
+      </AuthProvider>
     </ApolloProvider>
   );
 }
