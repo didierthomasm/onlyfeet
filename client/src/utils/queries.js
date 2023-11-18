@@ -2,13 +2,13 @@ import { gql } from '@apollo/client';
 
 export const QUERY_USERS = gql`
 query allUsers{
-  users{
+  users {
     _id
     firstName
     lastName
     email
+    role
     credits
-    subscribedTo
   }
 }
 `;

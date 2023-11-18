@@ -14,7 +14,9 @@ const imageSchema = new mongoose.Schema({
   format: String,
   resource_type: String,
   folder: String,
-  created_at: String
+  created_at: String,
+  //user id
+  // user: {id:{type:mongoose.Schema.Types.ObjectId, ref:"User.js"}},
 })
 
 
