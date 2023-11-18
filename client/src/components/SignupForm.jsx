@@ -75,7 +75,7 @@ export function SignupForm() {
           <Input type="text" placeholder="Last Name" value={lastName} name={'lastName'} autoComplete={'lastName'}
                  onChange={e => setLastName(e.target.value)} required/>
 
-          <Input type="text" placeholder="Last Name" value={username} name={'username'} autoComplete={'username'}
+          <Input type="text" placeholder="Username" value={username} name={'username'} autoComplete={'username'}
                  onChange={e => setUsername(e.target.value)} required/>
 
           <Input type="email" placeholder="Email" value={email} name={'email'} autoComplete={'email'}
