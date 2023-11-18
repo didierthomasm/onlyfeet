@@ -1,6 +1,9 @@
 import {NavLink} from "react-router-dom";
 import React, {useId} from "react";
 
+// Utils for authentication
+import Auth from '../utils/auth.js';
+
 // Styles
 import Nav from '../assets/style/Header-Navbar/NavbarStyle.js'
 
@@ -45,11 +48,16 @@ const section = [{
   name: 'Logout',
   icon: <LogOut className="inactive-icon" size={32}/>,
   iconActive: <LogOut className="active-icon" size={32}/>,
-  path: '/logout'
+  logout: true
 }
 ];
 
 export function Navbar() {
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
   return (
     <Nav>
       <ul>
@@ -58,14 +66,17 @@ export function Navbar() {
           return (
             <React.Fragment key={uniqueId}>
               <li>
-                <NavLink to={item.path} className={({ isActive }) => (isActive ? 'active' : '')}>
+                <NavLink
+                  to={item.logout ? '/' : item.path}
+                  className={({isActive}) => (isActive ? 'active' : '')}
+                  onClick={item.logout ? logout : null}
+                >
                   {item.icon}
                   {item.iconActive}
                   <span>{item.name}</span>
                 </NavLink>
               </li>
-
-              {item.name === 'Profile' || item.name === 'Earn' ? <hr /> : ''}
+              {item.name === 'Profile' || item.name === 'Earn' ? <hr/> : ''}
             </React.Fragment>
           )
         })}
