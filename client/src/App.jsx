@@ -7,7 +7,6 @@ import {setContext} from '@apollo/client/link/context';
 
 // Context
 import {GlobalProvider} from "./context/GlobalState.jsx";
-import {AuthProvider, useAuth} from "./context/AuthContext.jsx";
 
 
 // Styles
@@ -18,6 +17,7 @@ import {AppContainer} from "./assets/style/AppMain/AppStyle.js";
 import {LoginSignup} from "./pages/LoginSignup.jsx";
 import {Header} from "./components/Header.jsx";
 import {Footer} from "./components/Footer.jsx";
+import Auth from "./utils/auth.js";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -46,17 +46,14 @@ const client = new ApolloClient({
 });
 
 function App() {
-  const {isAuthenticated} = useAuth();
-
   const location = useLocation();
   const isSignUpPage = location.pathname === '/signup';
 
   return (
     <ApolloProvider client={client}>
-      <AuthProvider>
         <GlobalStyle/>
         <GlobalProvider>
-          {isAuthenticated ? (
+          {Auth.loggedIn() ? (
             <AppContainer>
               <Header/>
               <Outlet/>
@@ -68,7 +65,6 @@ function App() {
             </>
           )}
         </GlobalProvider>
-      </AuthProvider>
     </ApolloProvider>
   );
 }
