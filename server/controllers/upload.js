@@ -13,6 +13,7 @@ const upload = async (req, res, next) => {
     );
 
     if (signature === req.body.signature) {
+      console.log(req.user)
       if(req.body.response.resource_type === "video"){
         const newVideo = {
           public_id: req.body.public_id,

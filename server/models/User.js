@@ -18,12 +18,12 @@ const userSchema = new Schema({
     unique: true,
     match: [/.+@.+\..+/, 'Must match an email address!'],
   },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true
-  },
+  // username: {
+  //   type: String,
+  //   required: false,
+  //   unique: true,
+  //   trim: true
+  // },
   password: {
     type: String,
     required: true,
@@ -42,18 +42,18 @@ const userSchema = new Schema({
     type: Number,
     default: 0
   },
-  subscribedTo: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Subscription'
-    }
-  ],
-  content: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Content'
-    }
-  ]
+  // subscribedTo: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'Subscription'
+  //   }
+  // ],
+  // content: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'Content'
+  //   }
+  // ]
 },
   {
     toJSON: {

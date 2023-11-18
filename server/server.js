@@ -33,13 +33,14 @@ const startApolloServer = async () => {
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
   }));
+  
 
   //estos app use son para cloudinary
 
-  app.use(fileUpload());
-  app.use(express.urlencoded({ extended: true }));
+  // app.use(fileUpload());
+  // app.use(express.urlencoded({ extended: true }));
 
-  app.use(express.json());
+  // app.use(express.json());
 
   app.use('/api/sign-upload', signUploadRoutes)
   app.use('/api/upload', uploadRoutes)

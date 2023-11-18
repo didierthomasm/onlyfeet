@@ -6,11 +6,11 @@ scalar DateTime
     _id: ID!
     firstName: String!  # First name of the user
     lastName: String!   # Last name of the user
-    username: String!   # Unique username
+    # username: String!   Unique username
     email: String!      # Email address, must be unique
     role: String        # Role of the user in the system (e.g., 'creator', 'follower')
     credits: Int        # Credits available to the user for transactions
-    fullName: String    # Full name of the user (derived from first and last name)
+    # fullName: String    Full name of the user (derived from first and last name)
   }
 
 # Authentication data including the token and associated user
