@@ -2,6 +2,12 @@ import {Link, Outlet, useLocation} from "react-router-dom";
 import {useState} from "react";
 import {ApolloClient, InMemoryCache, ApolloProvider, createHttpLink} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
+import Carrusel from './components/Carrusel.jsx';
+//solo para prueba
+import logo from './assets/img/Logos/logo-letters-bgwhite.png';
+import logo2 from './assets/img/Logos/logo-letters.png';
+import logo3 from './assets/img/Logos/patas-feas-fondo-circle.png'
+
 
 // Context
 import {GlobalProvider} from "./context/GlobalState.jsx";
@@ -19,6 +25,10 @@ import {Footer} from "./components/Footer.jsx";
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
+
+  const images = [
+  logo, logo2, logo3
+  ];
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, {headers}) => {
@@ -54,6 +64,10 @@ function App() {
         {isLoggedIn ? (
           <AppContainer>
             <Header/>
+            <div>
+              <h2>Image Carrusel</h2>
+               <Carrusel images={images} />
+            </div>
             <h1>Upload Files</h1>
             <Link to="/">Home</Link>|<Link to="upload">Upload</Link>|<Link to="secure-upload">Secure Upload</Link>
             <br/>
