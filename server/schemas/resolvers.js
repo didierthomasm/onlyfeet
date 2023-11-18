@@ -35,7 +35,7 @@ const resolvers = {
             }
         },
 
-/*        me: async (parent, args, context) => {
+        me: async (parent, args, context) => {
             if (context.user) {
                 try {
                     return await User.findOne({ _id: context.user._id });
@@ -44,7 +44,7 @@ const resolvers = {
                 }
             }
             throw AuthenticationError;
-        }*/
+        }
     },
     Mutation: {
         addUser: async (parent, { firstName, lastName, email, username, password, role, created_at, credits }) => {

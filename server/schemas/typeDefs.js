@@ -34,6 +34,7 @@ scalar DateTime
   type Query {
     users: [User]!       # Retrieve all users
     user(userId: ID!): User # Retrieve a single user by ID
+    me: User             # Retrieve the logged-in user
     subscriptions:[Subscription] # Retrieve all subscriptions
     subscription(subId:ID!): Subscription # Retrieve a single subscription by ID
   }
