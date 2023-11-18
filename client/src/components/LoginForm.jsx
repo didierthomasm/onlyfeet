@@ -64,7 +64,6 @@ export function LoginForm({setIsLoggedIn}) {
 
   return (
     <MainWrapper>
-      {data ? (
         <Form name={'loginForm'} onSubmit={handleLogin}>
           <Title>Login</Title>
           <Input type="email" placeholder="Email" value={formState.email} name={'email'} autoComplete={'email'}
@@ -96,7 +95,6 @@ export function LoginForm({setIsLoggedIn}) {
             </NotLoggedInSpan>
           </NotLoggedIn>
         </Form>
-      ) : error && <p>Error: Unable to login</p>}
       {showModal && (
         <ModalBackdrop onClick={toggleModal}>
           <ModalContainer onClick={e => e.stopPropagation()}>
