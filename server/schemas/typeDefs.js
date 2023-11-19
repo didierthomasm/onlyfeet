@@ -40,7 +40,7 @@ scalar DateTime
 
 # Root mutation type
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, username: String!, password: String!, role: String, created_at: DateTime, credits: Int): Auth
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!, role: String, created_at: DateTime, credits: Int): Auth
     addSubscription(follower: ID!, creator: ID!, startDate: DateTime, endDate: DateTime, isActive: Boolean, subscriptionType: String): Subscription
     login(email: String!, password: String!): Auth
     removeUser: User

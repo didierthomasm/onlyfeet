@@ -64,9 +64,10 @@ const userSchema = new Schema({
   }
 );
 
-userSchema.virtual('fullName').get(function () {
-  return `${this.firstName} ${this.lastName}`;
-});
+//no estamos ocupando esta cosa
+// userSchema.virtual('fullName').get(function () {
+//   return `${this.firstName} ${this.lastName}`;
+// });
 
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {

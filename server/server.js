@@ -5,11 +5,12 @@ const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 const fileUpload = require('express-fileupload');
 const dotenv = require('dotenv');
-//const { connectDB } = require('./config/db.js');
+//const { connectDB } = require('./config/db.js'); dejar así, no puedo correr las 2 bases de datos, se integró todo en una
 const { errorHandler } = require('./middlewares/error.js');
 const cloudinary = require('./config/cloudinary.js');
 const uploadRoutes = require('./routes/upload.js');
 const signUploadRoutes = require('./routes/sign-upload.js');
+const passport = require('passport');
 
 dotenv.config({path:'./.env'})
 
@@ -23,6 +24,13 @@ const server = new ApolloServer({
   resolvers,
 });
 
+// passport configuration pq no pude con el otro y me harte
+require('./config/passport.js')(passport);
+
+// iniciar Passport
+app.use(passport.initialize());
+
+
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
@@ -35,7 +43,7 @@ const startApolloServer = async () => {
   }));
   
 
-  //estos app use son para cloudinary
+  //estos app use son para cloudinary, pero dejenlos así mientras jaja pq si está jalando
 
   // app.use(fileUpload());
   // app.use(express.urlencoded({ extended: true }));
