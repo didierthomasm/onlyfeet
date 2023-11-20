@@ -1,17 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import App from './App.jsx'
-import ErrorPage from "./pages/Error.jsx";
-import {Home} from "./pages/Home.jsx";
-import {LoginSignup} from "./pages/LoginSignup.jsx";
-import {Profile} from "./pages/Profile.jsx";
-import {Pay} from "./pages/Pay.jsx";
-import {Earn} from "./pages/Earn.jsx";
-import Help from "./pages/Help.jsx";
-import SecureUpload from './components/SecureUpload.jsx';
-import Upload from './components/Upload.jsx';
+import App from './App';
+import ErrorPage from "./pages/Error";
+import { Home } from "./pages/Home";
+import { LoginSignup } from "./pages/LoginSignup";
+import { Profile } from "./pages/Profile";
+import { Pay } from "./pages/Pay";
+import { Earn } from "./pages/Earn";
+import Help from "./pages/Help";
+import SecureUpload from './components/SecureUpload';
+import Upload from './components/Upload';
+import { UserProvider } from './context/UserContext'; // Import UserProvider
 
 const router = createBrowserRouter([
   {
@@ -57,10 +58,12 @@ const router = createBrowserRouter([
       },
     ]
   }
-])
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
-)
+    <UserProvider> {/* Wrap the application with UserProvider */}
+      <RouterProvider router={router} />
+    </UserProvider>
+  </React.StrictMode>
+);

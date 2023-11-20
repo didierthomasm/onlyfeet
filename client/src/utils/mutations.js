@@ -52,3 +52,44 @@ export const REMOVE_SUBSCRIPTION = gql`
     }
   }
 `;
+
+export const ADD_VIDEO = gql`
+  mutation addVideo($public_id: String!, $secure_url: String!, $playback_url: String, $width: Int, $height: Int, $format: String, $resource_type: String, $folder: String, $duration: Int, $created_at: DateTime, $user: ID!) {
+    addVideo(public_id: $public_id, secure_url: $secure_url, playback_url: $playback_url, width: $width, height: $height, format: $format, resource_type: $resource_type, folder: $folder, duration: $duration, created_at: $created_at, user: $user) {
+      _id
+      public_id
+      secure_url
+      playback_url
+      width
+      height
+      format
+      resource_type
+      folder
+      duration
+      created_at
+      user {
+        _id
+      }
+    }
+  }
+`;
+
+// Mutation for adding an image
+export const ADD_IMAGE = gql`
+  mutation addImage($public_id: String!, $secure_url: String!, $width: Int, $height: Int, $format: String, $resource_type: String, $folder: String, $created_at: DateTime, $user: ID!) {
+    addImage(public_id: $public_id, secure_url: $secure_url, width: $width, height: $height, format: $format, resource_type: $resource_type, folder: $folder, created_at: $created_at, user: $user) {
+      _id
+      public_id
+      secure_url
+      width
+      height
+      format
+      resource_type
+      folder
+      created_at
+      user {
+        _id
+      }
+    }
+  }
+`;

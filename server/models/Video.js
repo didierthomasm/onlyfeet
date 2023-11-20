@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const {Schema, model} = require('mongoose');
 const User = require('./User');
 
 const videoSchema = new mongoose.Schema({
@@ -18,9 +18,14 @@ const videoSchema = new mongoose.Schema({
   folder: String,
   duration: Number,
   created_at: String,
-  //user id
-  // user: {id:{type:mongoose.Schema.Types.ObjectId, ref:"User.js"}},
+  //user reference
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User' // Reference to the User model
+  },
 
 })
 
-module.exports = mongoose.model('Video', videoSchema);
+const Video = model('User', videoSchema);
+module.exports = Video;
+

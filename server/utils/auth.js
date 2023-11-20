@@ -11,13 +11,13 @@ module.exports = {
       code: 'UNAUTHENTICATED',
     },
   }),
-  authMiddleware: function ({ req }) {
+  authMiddleware: function ( {req} ) {
     //console.log('JWT Secret:', secret); // log the JWT secret for debugging
     //console.log('Headers:', req.headers); // log all headers
-
+    // console.log(req);
     // initialize token as undefined
     let token;
-   
+    
 
     // check if the authorization header is present
     if (req.headers.authorization) {
@@ -41,7 +41,7 @@ module.exports = {
     return req; // Return the modified request object
   },
   signToken: function ({ email, _id }) {
-    console.log('Signing Token - JWT Secret:', secret); // Log when signing a token
+    //console.log('Signing Token - JWT Secret:', secret); // Log when signing a token
     const payload = { email, _id };
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
