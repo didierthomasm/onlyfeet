@@ -1,10 +1,15 @@
+const dotenv = require('dotenv');
+dotenv.config({path:'./.env'})
+//console.log(process.env);
+
+
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 const fileUpload = require('express-fileupload');
-const dotenv = require('dotenv');
+
 //const { connectDB } = require('./config/db.js'); dejar así, no puedo correr las 2 bases de datos, se integró todo en una
 const { errorHandler } = require('./middlewares/error.js');
 const cloudinary = require('./config/cloudinary.js');
@@ -12,7 +17,7 @@ const uploadRoutes = require('./routes/upload.js');
 const signUploadRoutes = require('./routes/sign-upload.js');
 const passport = require('passport');
 
-dotenv.config({path:'./.env'})
+
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');

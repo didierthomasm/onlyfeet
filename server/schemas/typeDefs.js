@@ -8,6 +8,7 @@ scalar DateTime
     lastName: String!   # Last name of the user
     # username: String!   Unique username
     email: String!      # Email address, must be unique
+    password: String!
     role: String        # Role of the user in the system (e.g., 'creator', 'follower')
     credits: Int        # Credits available to the user for transactions
     # fullName: String    Full name of the user (derived from first and last name)

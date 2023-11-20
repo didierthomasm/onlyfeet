@@ -1,6 +1,8 @@
 const { User, Content, Subscription } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { signToken } = require('../utils/auth');
 const {DateTime} = require("./scalar");
+const { AuthenticationError } = require('apollo-server-express');
+
 
 const resolvers = {
     Query: {
@@ -63,25 +65,25 @@ const resolvers = {
 
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
-
+        
             if (!user) {
-                throw AuthenticationError;
+                throw new AuthenticationError('User not found.');
             }
-
+        
+            // Log the email and entered password (for debugging)
+            //console.log(`Login attempt for email: ${email}, Entered Password: ${password}`);
+        
             const correctPw = await user.isCorrectPassword(password);
-
+        
             if (!correctPw) {
-                throw AuthenticationError;
+                throw new AuthenticationError('Incorrect password.');
             }
-
-/*            if (User.role !== 0 && User.role !== 1 && User.role !== 2) {
-                console.log(User.role)
-                throw AuthenticationError;
-            }*/
-
+        
             const token = signToken(user);
             return { token, user };
         },
+        
+        
 
         removeUser: (parent, args, context) => {
             if (context.user) {
