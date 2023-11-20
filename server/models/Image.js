@@ -1,6 +1,6 @@
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
-const imageSchema = new mongoose.Schema({
+const imageSchema = new Schema({
   public_id: {
     type: String,
     required: true,
@@ -15,13 +15,11 @@ const imageSchema = new mongoose.Schema({
   resource_type: String,
   folder: String,
   created_at: String,
-
-  // User reference
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User' // Reference to the User model
   },
-})
+});
 
 const Image = model('Image', imageSchema);
 module.exports = Image;

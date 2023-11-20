@@ -11,6 +11,7 @@ const SecureUpload = () => {
   const [loading, setLoading] = useState(false);
 
   const { user } = useContext(UserContext);
+  console.log("User from context:", user);
 
   const [addVideo] = useMutation(ADD_VIDEO);
   const [addImage] = useMutation(ADD_IMAGE);
@@ -43,8 +44,10 @@ const SecureUpload = () => {
     try {
       setLoading(true);
 
-      if (!user || !user._id) {
+      if (!user || !user.data || !user.data._id) {
         console.error("No user ID found");
+        alert('User ID not found. Please log in to continue.'); // User-friendly error message
+        setLoading(false);
         return;
       }
 
@@ -55,7 +58,7 @@ const SecureUpload = () => {
             variables: {
               public_id: imgResult.public_id,
               secure_url: imgResult.secure_url,
-              user: user._id, // Using the logged-in user's ID
+              user: user.data._id, // Using the logged-in user's ID
             }
           });
         }
@@ -66,7 +69,7 @@ const SecureUpload = () => {
             variables: {
               public_id: videoResult.public_id,
               secure_url: videoResult.secure_url,
-              user: user._id, // Using the logged-in user's ID
+              user: user.data._id, // Using the logged-in user's ID
             }
           });
         }
