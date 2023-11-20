@@ -21,6 +21,7 @@ import {
 import AuthService from "../utils/auth.js";
 
 export function SignupForm({ setIsLoggedIn }) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -28,8 +29,6 @@ export function SignupForm({ setIsLoggedIn }) {
   const [termsAndConditions, setTermsAndConditions] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [addUser] = useMutation(ADD_USER);
-
-  const navigate = useNavigate();
 
   // Function to check if button should be disabled
   const isDisabled = email === '' || password === '' || firstName === '' || lastName === '' || !termsAndConditions;
@@ -39,9 +38,14 @@ export function SignupForm({ setIsLoggedIn }) {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  //navigate home
+  
+
   // Function to handle signup
   const handleSignup = async (e) => {
     e.preventDefault();
+    console.log("Signup attempt with:", { firstName, lastName, email, password });
+    
     try {
       const response = await addUser({
         variables: {
@@ -52,12 +56,19 @@ export function SignupForm({ setIsLoggedIn }) {
           // Include other fields check with schemas
         }
       });
-      AuthService.login(response.data.addUser.token);
+      console.log("Signup successful, response:", response);
+
+      await AuthService.login(response.data.addUser.token);
+      //console.log("Logged in with token:", response.data.addUser.token);
+
       setIsLoggedIn(true);
-      navigate('/'); // Redirect to dashboard after successful signup
+      console.log("Set isLoggedIn to true");
+
+      navigate('/profile');
+      console.log("Navigated to root '/'");
+      
     } catch (error) {
       console.error("Signup error:", error);
-      // Optionally, you can add UI feedback for the user here
     }
   };
 
@@ -73,11 +84,10 @@ export function SignupForm({ setIsLoggedIn }) {
                onChange={e => setEmail(e.target.value)} required />
         <InputWrapper>
           <PasswordInput type={isPasswordVisible ? 'text' : 'password'} placeholder="Password" value={password}
-
                          onChange={e => setPassword(e.target.value)} required />
           <TogglePasswordVisibility onClick={e => {
-            e.preventDefault()
-            handlePasswordVisibility()
+            e.preventDefault();
+            handlePasswordVisibility();
           }}>
             {isPasswordVisible ? <Eye size={24} /> : <EyeClose size={24} />}
           </TogglePasswordVisibility>
@@ -87,12 +97,11 @@ export function SignupForm({ setIsLoggedIn }) {
           setTermsAndConditions={setTermsAndConditions}
         />
         <Button type="submit" disabled={isDisabled}>Sign Up</Button>
-        {/*Section if the user already has an account*/}
         <NotLoggedIn>
           <NotLoggedInSpan>
             <span>Already have an account?</span>
             <ButtonLink onClick={(e) => {
-              e.preventDefault()
+              e.preventDefault();
             }}><Link to={'/login'}>Login</Link></ButtonLink>
           </NotLoggedInSpan>
         </NotLoggedIn>

@@ -25,6 +25,7 @@ import {
 import AuthService from "../utils/auth.js";
 
 export function LoginForm({ setIsLoggedIn }) {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN_USER);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -38,7 +39,7 @@ export function LoginForm({ setIsLoggedIn }) {
 
   const toggleModal = () => setShowModal(!showModal);
 
-  const navigate = useNavigate();
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -57,9 +58,9 @@ export function LoginForm({ setIsLoggedIn }) {
         variables: { ...formState }
       });
       console.log("Login successful:", response);
-      AuthService.login(response.data.login.token);
+      await AuthService.login(response.data.login.token);
       setIsLoggedIn(true);
-      navigate('/'); // Redirect to dashboard after successful login
+      navigate('/profile'); // Redirect  after successful login
     } catch (e) {
       console.error("Login error:", e);
       // Optionally, you can add UI feedback for the user here
