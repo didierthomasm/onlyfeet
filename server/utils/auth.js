@@ -25,7 +25,7 @@ module.exports = {
       const authHeader = req.headers.authorization;
       token = authHeader.split(' ')[1]; // this assumes the format is "Bearer <token>"
 
-      console.log('Received Token:', token); // log the extracted token, i dont know why this does not work
+      //console.log('Received Token:', token); // log the extracted token, i dont know why this does not work
     }
 
     if (token) {

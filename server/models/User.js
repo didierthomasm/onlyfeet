@@ -25,7 +25,7 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    required: true,
+    required: false,
     enum: ['creator', 'follower'], default: 'follower'
   },
   created_at: {
