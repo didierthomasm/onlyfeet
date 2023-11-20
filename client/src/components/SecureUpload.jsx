@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import axios from 'axios';
 import { TailSpin } from 'react-loader-spinner';
 import { useMutation } from '@apollo/client';
-import { ADD_VIDEO, ADD_IMAGE } from '../utils/mutations'; // Adjust this path
-import { UserContext } from '../context/UserContext'; // Adjust this path
+import { ADD_VIDEO, ADD_IMAGE } from '../utils/mutations'; 
+import { UserContext } from '../context/UserContext'; 
 
 const SecureUpload = () => {
   const [img, setImg] = useState(null);
