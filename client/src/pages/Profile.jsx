@@ -1,10 +1,15 @@
-import {useContext, useState} from "react";
+import {useState, useEffect} from "react";
 
+// Router
+import {Navigate, useParams} from "react-router-dom";
+
+// GraphQL
+import {useQuery} from "@apollo/client";
+import {QUERY_ME, QUERY_USER} from "../utils/queries";
+
+// Images placeholders
 import userPlaceholder from "../assets/img/Profile+/profile-placeholder.png";
 import coverPlaceholder from "../assets/img/Profile+/cover-placeholder.png";
-
-// Context
-import {GlobalContext} from "../context/GlobalState.jsx";
 
 // Styled components for the profile
 import {
@@ -19,45 +24,54 @@ import {
   ProfilePhoto,
   Username
 } from '../assets/style/Profile/ProfileStyle.js'
-import EditableField from "../components/EditableField.jsx";
+
+// Component ProfileEdit
+import {ProfileEdit} from "../components/ProfileEdit.jsx";
+import Auth from "../utils/auth.js";
 
 export function Profile() {
-  const { user, updateProfile } = useContext(GlobalContext);
+  // Get the profile id from the url
+  const { profileId } = useParams();
+  const loggedInUserId = Auth.loggedIn() ? Auth.getProfile().data._id : null;
+
+  // Determine the ID to use for fetching profile data
+  const effectiveProfileId = profileId || loggedInUserId;
+
+  // Query the user data
+  const { loading, data } = useQuery(
+    effectiveProfileId === loggedInUserId ? QUERY_ME : QUERY_USER,
+    { variables: { userId: effectiveProfileId } },
+  );
+
+  // State hooks for the profile data and the editing state
+  const [profile, setProfile] = useState({});
   const [isEditing, setIsEditing] = useState(false);
-  const [editValues, setEditValues] = useState({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    username: user.username,
-    bio: user.bio,
-  });
 
-  // Handle null profile pictures
-  const profilePictures = {
-    userPic: user.profilePic || userPlaceholder,
-    coverPic: user.coverPic || coverPlaceholder,
-  } ;
-
-  // Handle edit button
-  const handleEditToggle = () => {
-    if (isEditing) {
-      handleSave();
+  // Set the profile data depending on the query result
+  useEffect(() => {
+    if (data) {
+      setProfile(data.me || data.user || {});
     }
-    setIsEditing(!isEditing);
-  };
+  }, [data]);
 
-  // Handle save button
-  const handleSave = () => {
-    updateProfile(editValues);
-    setIsEditing(false);
+  // Only show edit button if the logged-in user is viewing their own profile
+  const showEditButton = effectiveProfileId === loggedInUserId;
+
+  // Use React Router's `<Navigate />` component to redirect to personal profile page if username is yours
+  if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
+    return <Navigate to="/me" />;
   }
 
-  // Handle change in editable fields
-  const handleChange = (name, value) => {
-    setEditValues(prevValues => ({
-      ...prevValues,
-      [name]: value,
-    }));
+  // Set the profile pictures
+  const profilePictures = {
+    userPic: profile.profilePic || userPlaceholder,
+    coverPic: profile.coverPic || coverPlaceholder,
   };
+
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <ProfileContainer>
@@ -65,50 +79,22 @@ export function Profile() {
       <ProfilePhoto src={profilePictures.userPic} alt="Profile"/>
       <ProfileInfo>
         {isEditing ? (
-          <>
-            <EditableField
-              isEditing={isEditing}
-              value={editValues.firstName}
-              onChange={handleChange}
-              name="firstName"
-              placeholder="First Name"
-              DisplayComponent={Name}
-            />
-            <EditableField
-              isEditing={isEditing}
-              value={editValues.lastName}
-              onChange={handleChange}
-              name="lastName"
-              placeholder="Last Name"
-              DisplayComponent={Name}
-            />
-          </>
+          <ProfileEdit profile={profile} setIsEditing={setIsEditing}/>
         ) : (
-          <Name>{`${user.firstName} ${user.lastName}`}</Name>
+          <>
+            <Name>{`${profile.fullName} `}</Name>
+            <Username>{profile.username}</Username>
+            <BioSection>
+              <BioText>{profile.bio}</BioText>
+            </BioSection>
+            {showEditButton && (
+              <EditButton onClick={() => setIsEditing(true)}>
+                <Icon /> Edit Profile
+              </EditButton>
+            )}
+          </>
         )}
-        <EditableField
-          isEditing={isEditing}
-          value={editValues.username}
-          onChange={handleChange}
-          name="username"
-          placeholder="Username"
-          DisplayComponent={Username}
-        />
-        <BioSection>
-          <EditableField
-            isEditing={isEditing}
-            value={editValues.bio}
-            onChange={handleChange}
-            name="bio"
-            placeholder="Bio"
-            DisplayComponent={BioText}
-            isTextArea
-          />
-        </BioSection>
-        <EditButton onClick={handleEditToggle}>
-          {isEditing ? <><Icon /> Save</> : <><Icon /> Edit Profile</>}
-        </EditButton>
       </ProfileInfo>
     </ProfileContainer>
-  )
+  );
 }
