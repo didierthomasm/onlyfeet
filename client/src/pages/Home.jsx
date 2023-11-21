@@ -58,7 +58,7 @@ export function Home() {
         <DropdownContainer>
           {users.map(user => (
             <SearchResultItem to={`/profile/${user._id}`} key={user._id}>
-              {user.username} - {user.email}
+              {user.username} - {user.fullName}
             </SearchResultItem>
           ))}
         </DropdownContainer>
