@@ -42,8 +42,8 @@ const handleSubmit =async (e)=>{
         //subir video
         const videoUrl=await uploadFile('video');
 
-        //mandar backend api request
-        await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/videos`,{imgUrl, videoUrl})
+        // //mandar backend api request
+        // await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/videos`,{imgUrl, videoUrl})
 
         //resetear
 

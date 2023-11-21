@@ -1,91 +1,91 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from 'axios';
 import { TailSpin } from 'react-loader-spinner';
+import { useMutation } from '@apollo/client';
+import { ADD_VIDEO, ADD_IMAGE } from '../utils/mutations'; 
+import { UserContext } from '../context/UserContext'; 
 
 const SecureUpload = () => {
+  const [img, setImg] = useState(null);
+  const [video, setVideo] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const [img, setImg] = useState(null),
-        [video, setVideo] = useState(null),
-        [loading, setLoading] = useState(false);
+  const { user } = useContext(UserContext);
+  console.log("User from context:", user);
 
+  const [addVideo] = useMutation(ADD_VIDEO);
+  const [addImage] = useMutation(ADD_IMAGE);
 
   const uploadFile = async (type) => {
     const folder = type === 'image' ? 'image' : 'video';
 
     const data = new FormData();
     data.append("file", type === 'image' ? img : video);
-    data.append("upload_preset", type ==='image'?'images_preset':'videos_preset')
-
-
+    data.append("upload_preset", type === 'image' ? 'images_preset' : 'videos_preset');
 
     try {
-
-      const res = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_APP_CLOUDINARY_CLOUD_NAME}/${folder}/upload`, data,{
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          onUploadProgress: (e)=>{
-            console.log(e.loaded / e.total);
-          }
+      const res = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_APP_CLOUDINARY_CLOUD_NAME}/${folder}/upload`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress: (e) => {
+          console.log(e.loaded / e.total);
+        }
       });
 
-      const uploadData = {
-        public_id: res.data.public_id,
-        version: res.data.version,
-        signature: res.data.signature,
-        response: res.data
-      }
-
-      const serverRes = await axios.post(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/upload`, uploadData);
-
-      return serverRes;
+      return res.data; // Returning the response data directly
     } catch (error) {
       console.error(error);
     }
-
-  }
-
-  const getSignatureForUpload = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/api/sign-upload`);
-      return res.data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
 
-      if (img&&video) {
-        //firma para subir imagen
-        const { timestamp: imgTimestamp, signature: imgSignature } = await getSignatureForUpload();
-        //subir img
-        const imgUrl = await uploadFile('image', imgTimestamp, imgSignature);
-        console.log({imgUrl})
-      
-        //firma para el video
-        const { timestamp: videoTimestamp, signature: videoSignature } = await getSignatureForUpload('videos');
-    
-        //subir video
-        const videoUrl = await uploadFile('video', videoTimestamp, videoSignature);
-        console.log({videoUrl})
+      if (!user || !user.data || !user.data._id) {
+        console.error("No user ID found");
+        alert('User ID not found. Please log in to continue.'); // User-friendly error message
+        setLoading(false);
+        return;
+      }
+
+      if (img && video) {
+        const imgResult = await uploadFile('image');
+        if (imgResult) {
+          await addImage({
+            variables: {
+              public_id: imgResult.public_id,
+              secure_url: imgResult.secure_url,
+              user: user.data._id, // Using the logged-in user's ID
+            }
+          });
+        }
+
+        const videoResult = await uploadFile('video');
+        if (videoResult) {
+          await addVideo({
+            variables: {
+              public_id: videoResult.public_id,
+              secure_url: videoResult.secure_url,
+              user: user.data._id, // Using the logged-in user's ID
+            }
+          });
+        }
+
         setImg(null);
         setVideo(null);
-      }else{
-        alert('Debes agregar foto y video')
+      } else {
+        alert('Please add both a photo and a video');
       }
-    
-  
+
       setLoading(false);
       e.target.reset();
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
-
+  };
 
   return (
     <div>
@@ -98,23 +98,18 @@ const SecureUpload = () => {
             accept="video/*"
             id="video"
             onChange={(e) => {
-                const file = e.target.files[0];
-                // setVtype(file.type)
-                const reader = new FileReader();
-                reader.readAsDataURL(file)
-                reader.onloadend = ()=>{
-                  const rvideo = document.createElement("source")
-                  document.querySelector("#vid").style.visibility = "visible"
-                  setVideo(reader.result);
-                  // console.log(video);
-                  rvideo.src = reader.result
-                  rvideo.setAttribute('type',file.type)
-                  
-                  document.querySelector("#vid").appendChild(rvideo)
-                  // console.log(file);
-                }
+              const file = e.target.files[0];
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onloadend = () => {
+                const rvideo = document.createElement("source");
+                document.querySelector("#vid").style.visibility = "visible";
+                setVideo(reader.result);
+                rvideo.src = reader.result;
+                rvideo.setAttribute('type', file.type);
+                document.querySelector("#vid").appendChild(rvideo);
               }
-            }
+            }}
           />
         </div>
         <br />
@@ -126,24 +121,22 @@ const SecureUpload = () => {
             accept="image/*"
             id="img"
             onChange={(e) => {
-                const file = e.target.files[0];
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onloadend = ()=>{
-                  const feetImg = document.createElement("img");
-                  
-                  document.querySelector("#pic").appendChild(feetImg)
-                  setImg(reader.result);
-                  feetImg.setAttribute('src',reader.result)
-                }
+              const file = e.target.files[0];
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onloadend = () => {
+                const imgElement = document.createElement("img");
+                document.querySelector("#pic").appendChild(imgElement);
+                setImg(reader.result);
+                imgElement.setAttribute('src', reader.result);
               }
-            }
+            }}
           />
         </div>
         <br />
         <button type="submit">Upload</button>
       </form>
-        <video id="vid" controls style={{visibility:'hidden'}}></video>
+      <video id="vid" controls style={{ visibility: 'hidden' }}></video>
       <div id="pic"></div>
 
       {loading && <TailSpin
@@ -157,8 +150,7 @@ const SecureUpload = () => {
         visible={true}
       />}
     </div>
+  );
+};
 
-  )
-}
-
-export default SecureUpload
+export default SecureUpload;

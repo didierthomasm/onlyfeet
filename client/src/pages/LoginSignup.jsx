@@ -30,7 +30,7 @@ const Slogan = styled.h2`
 
 export function LoginSignup({setIsLoggedIn, mode}) {
   const isSignUp = mode === 'signup';
-  console.log(setIsLoggedIn)
+  //console.log(setIsLoggedIn)
   return (
     <>
       <MainContainer>

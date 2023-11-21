@@ -18,12 +18,6 @@ const userSchema = new Schema({
     unique: true,
     match: [/.+@.+\..+/, 'Must match an email address!'],
   },
-  // username: {
-  //   type: String,
-  //   required: false,
-  //   unique: true,
-  //   trim: true
-  // },
   password: {
     type: String,
     required: true,
@@ -31,7 +25,7 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    required: true,
+    required: false,
     enum: ['creator', 'follower'], default: 'follower'
   },
   created_at: {
@@ -42,6 +36,18 @@ const userSchema = new Schema({
     type: Number,
     default: 0
   },
+  videos: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Video' // Assuming you have a Video model
+    }
+  ],
+  images: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Image' // Assuming you have an Image model
+    }
+  ]
   // subscribedTo: [
   //   {
   //     type: Schema.Types.ObjectId,
@@ -64,11 +70,6 @@ const userSchema = new Schema({
   }
 );
 
-//no estamos ocupando esta cosa
-// userSchema.virtual('fullName').get(function () {
-//   return `${this.firstName} ${this.lastName}`;
-// });
-
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 5;
@@ -78,7 +79,10 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.methods.isCorrectPassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+  const isMatch = await bcrypt.compare(password, this.password);
+  // Log the comparison result
+  //console.log(`Password comparison result: ${isMatch}`);
+  return isMatch;
 };
 
 const User = model('User', userSchema);
