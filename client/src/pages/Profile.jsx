@@ -27,6 +27,8 @@ import {
 
 // Component ProfileEdit
 import {ProfileEdit} from "../components/ProfileEdit.jsx";
+import FollowButtonComponent from  "../components/FollowButton.jsx";
+
 import Auth from "../utils/auth.js";
 
 export function Profile() {
@@ -68,6 +70,14 @@ export function Profile() {
     coverPic: profile.coverPic || coverPlaceholder,
   };
 
+  // Assume you have the logged-in user's following list as part of the profile data
+  // and it is an array of user IDs that the logged-in user is following
+  const loggedInUserFollowingList = profile.followers?.map(following => following._id);
+
+  // Check if the logged-in user is already following the viewed profile
+  const isAlreadyFollowing = loggedInUserFollowingList?.includes(Auth.getProfile().data._id);
+
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -78,6 +88,7 @@ export function Profile() {
       <CoverPhoto src={profilePictures.coverPic} alt='Cover'/>
       <ProfilePhoto src={profilePictures.userPic} alt="Profile"/>
       <ProfileInfo>
+        <FollowButtonComponent userIdToFollow={profile._id} isAlreadyFollowing={isAlreadyFollowing} />
         {isEditing ? (
           <ProfileEdit profile={profile} setIsEditing={setIsEditing}/>
         ) : (
