@@ -1,6 +1,10 @@
 import React from 'react';
 import {Outlet, useLocation} from "react-router-dom";
 
+// Stripe
+import {Elements} from "@stripe/react-stripe-js";
+import {loadStripe} from "@stripe/stripe-js";
+
 import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
 
@@ -40,24 +44,25 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const stripePromise = loadStripe(import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY);
+
 function App() {
   const location = useLocation();
   const isSignUpPage = location.pathname === '/signup';
 
   return (
     <ApolloProvider client={client}>
-      <GlobalStyle/>
-      {Auth.loggedIn() ? (
-        <AppContainer>
-          <Header/>
-          <Outlet/>
-        </AppContainer>
-      ) : (
-        <>
+      <Elements stripe={stripePromise}>
+        <GlobalStyle/>
+        {Auth.loggedIn() ? (
+          <AppContainer>
+            <Header/>
+            <Outlet/>
+          </AppContainer>
+        ) : (
           <LoginSignup mode={isSignUpPage ? 'signup' : 'login'}/>
-          <Footer/>
-        </>
-      )}
+        )}
+      </Elements>
     </ApolloProvider>
   );
 }
