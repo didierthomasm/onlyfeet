@@ -28,7 +28,7 @@ const section = [{
   name: 'Profile',
   icon: <Person className="inactive-icon" size={32}/>,
   iconActive: <PersonFill className="active-icon" size={32}/>,
-  path: '/profile'
+  path: '/me'
 }, {
   name: 'Pay',
   icon: <Payment className="inactive-icon" size={32}/>,

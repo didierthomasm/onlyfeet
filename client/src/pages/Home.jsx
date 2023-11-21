@@ -1,16 +1,28 @@
-import styled from "styled-components";
-import image from "../assets/img/Errors/inProduction.png";
-
-const Main = styled.main`
-
-`;
-
+import { useQuery } from "@apollo/client";
+import { QUERY_USERS } from "../utils/queries";
+import {Link} from "react-router-dom";
 
 export function Home() {
-  return (
-    <Main>
+  const { loading, data } = useQuery(QUERY_USERS);
+  const users = data?.users || [];
 
-      <img src={image} alt={''} style={{ height: '100vh'}}/>
-    </Main>
+  return (
+    <>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          {users.map((user) => (
+            <div key={user._id}>
+
+              <p>{user.username}</p>
+              <Link to={`/profile/${user._id}`}>
+                <p>{user.firstName}</p>
+              </Link>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   )
 }
