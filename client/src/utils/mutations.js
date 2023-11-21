@@ -57,6 +57,24 @@ mutation removeFollower($followerId: ID!, $followingId: ID!) {
 }
 `;
 
+export const ADD_CREDITS = gql`
+mutation addCredits($userId: ID!, $credits: Int!) {
+  addCredits(userId: $userId, credits: $credits) {
+    _id
+    credits
+  }
+}
+`;
+
+export const REMOVE_CREDITS = gql`
+mutation removeCredits($userId: ID!, $credits: Int!) {
+  removeCredits(userId: $userId, credits: $credits) {
+    _id
+    credits
+  }
+}
+`;
+
 /*export const ADD_POST = gql`
 mutation addPost($postText: String!) {
   addPost(postText: $postText) {

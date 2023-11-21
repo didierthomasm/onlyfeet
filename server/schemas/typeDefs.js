@@ -66,8 +66,8 @@ scalar DateTime
     removeUser: User
     addContent(creator: ID!, title: String!, description: String, price: Int, type: String, url: String, created_at: DateTime): Content
     removeContent(contentId: ID!): Content
-    addCredits(credits: Int!): User
-    removeCredits(credits: Int!): User
+    addCredits(userId: ID!, credits: Int!): User
+    removeCredits(userId: ID!, credits: Int!): User
     addFollower(followerId: ID!, followingId: ID!): User
     removeFollower(followerId: ID!, followingId: ID!): User
   }

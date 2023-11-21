@@ -60,6 +60,7 @@ export const QUERY_ME = gql`
       fullName
       bio
       email
+      credits
       followers {
         _id
         

@@ -84,28 +84,30 @@ const resolvers = {
             return { token, content };
         },
 
-        addCredits: (parent, { credits }, context) => {
+        addCredits: async (parent, {userId, credits}, context) => {
             if (!context.user) {
                 throw AuthenticationError;
             }
 
-            return User.findByIdAndUpdate(
-              context.user._id,
+            const updatedUser = await User.findByIdAndUpdate(
+              userId,
               {$inc: {credits: credits}},
-              {new: true}
+              {new: true, runValidators: true}
             );
+            return updatedUser;
         },
 
-        removeCredits: (parent, { credits }, context) => {
+        removeCredits: async (parent, {userId, credits }, context) => {
             if (!context.user) {
                 throw AuthenticationError;
             }
 
-            return User.findByIdAndUpdate(
-              context.user._id,
+            const updatedUser = await User.findByIdAndUpdate(
+              userId,
               {$inc: {credits: -credits}},
-              {new: true}
+              {new: true, runValidators: true}
             );
+            return updatedUser;
         },
 
         addFollower: async (parent, { followerId, followingId }, context) => {
