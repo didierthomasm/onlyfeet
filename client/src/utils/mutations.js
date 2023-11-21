@@ -35,8 +35,29 @@ mutation updateUser($firstName: String!, $lastName: String!, $username: String!,
 }
 `;
 
+export const ADD_FOLLOWER = gql`
+mutation addFollower($followerId: ID!, $followingId: ID!) {
+  addFollower(followerId: $followerId, followingId: $followingId) {
+    _id
+    followers {
+      _id
+    }
+  }
+}
+`;
 
-export const ADD_POST = gql`
+export const REMOVE_FOLLOWER = gql`
+mutation removeFollower($followerId: ID!, $followingId: ID!) {
+  removeFollower(followerId: $followerId, followingId: $followingId) {
+    _id
+    followers {
+      _id
+    }
+  }
+}
+`;
+
+/*export const ADD_POST = gql`
 mutation addPost($postText: String!) {
   addPost(postText: $postText) {
     _id
@@ -133,32 +154,5 @@ mutation updateComment($postId: ID!, $commentId: ID!, $commentText: String!) {
     }
   }
 }
-`;
+`;*/
 
-export const ADD_FRIEND = gql`
-mutation addFriend($friendId: ID!) {
-  addFriend(friendId: $friendId) {
-    _id
-    username
-    friendCount
-    friends {
-      _id
-      username
-    }
-  }
-}
-`;
-
-export const REMOVE_FRIEND = gql`
-mutation removeFriend($friendId: ID!) {
-  removeFriend(friendId: $friendId) {
-    _id
-    username
-    friendCount
-    friends {
-      _id
-      username
-    }
-  }
-}
-`;

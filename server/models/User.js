@@ -33,11 +33,6 @@ const userSchema = new Schema({
     required: true,
     minlength: 8
   },
-  role: {
-    type: String,
-    required: true,
-    enum: ['creator', 'follower'], default: 'follower'
-  },
   created_at: {
     type: Date,
     default: Date.now
@@ -46,6 +41,18 @@ const userSchema = new Schema({
     type: Number,
     default: 0
   },
+  followers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  following: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
   subscribedTo: [
     {
       type: Schema.Types.ObjectId,
