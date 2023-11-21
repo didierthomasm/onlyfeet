@@ -5,6 +5,10 @@ export const QUERY_USER = gql`
     user(userId: $userId) {
       _id
       username
+      firstName
+      lastName
+      fullName
+      bio
       email
     }
   }
@@ -15,6 +19,10 @@ export const QUERY_USERS = gql`
     users {
       _id
       username
+      firstName
+      lastName
+      fullName
+      bio
       email
     }
   }
@@ -25,6 +33,10 @@ export const QUERY_ME = gql`
     me {
       _id
       username
+      firstName
+      lastName
+      fullName
+      bio
       email
     }
   }
