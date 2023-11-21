@@ -48,7 +48,7 @@ export function LoginForm() {
   // Function to handle login
   const handleLogin = async (event) => {
     event.preventDefault();
-    console.log({email, password});
+
     try {
       const {data} = await login({
         variables: {...{email, password}},

@@ -31,7 +31,7 @@ export function SignupForm() {
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
   const [addUser, {error, data}] = useMutation(ADD_USER);
-  const [termsAndConditions, setTermsAndConditions] = useState(true);
+  const [termsAndConditions, setTermsAndConditions] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   // Function to check if button should be disabled
@@ -69,10 +69,10 @@ export function SignupForm() {
         <Form name={'signupForm'} onSubmit={handleSignup}>
           <Title>Sign Up</Title>
 
-          <Input type="text" placeholder="First Name" value={firstName} name={'firstName'} autoComplete={'firstName'}
+          <Input type="text" placeholder="First Name" value={firstName} name={'firstName'} autoComplete={'first name'}
                  onChange={e => setFirstName(e.target.value)} required/>
 
-          <Input type="text" placeholder="Last Name" value={lastName} name={'lastName'} autoComplete={'lastName'}
+          <Input type="text" placeholder="Last Name" value={lastName} name={'lastName'} autoComplete={'last name'}
                  onChange={e => setLastName(e.target.value)} required/>
 
           <Input type="text" placeholder="Username" value={username} name={'username'} autoComplete={'username'}
@@ -83,7 +83,7 @@ export function SignupForm() {
 
           <InputWrapper>
             <PasswordInput type={isPasswordVisible ? 'text' : 'password'} placeholder="Password" value={password}
-
+                            name={'password'} autoComplete={'password'}
                            onChange={e => setPassword(e.target.value)} required/>
             <TogglePasswordVisibility onClick={e => {
               e.preventDefault()
