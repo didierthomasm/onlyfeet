@@ -4,11 +4,6 @@ import {Outlet, useLocation} from "react-router-dom";
 import {ApolloClient, ApolloProvider, createHttpLink, InMemoryCache} from '@apollo/client';
 import {setContext} from '@apollo/client/link/context';
 
-
-// Context
-import {GlobalProvider} from "./context/GlobalState.jsx";
-
-
 // Styles
 import GlobalStyle from "../src/assets/style/GlobalStyle"
 import {AppContainer} from "./assets/style/AppMain/AppStyle.js";
@@ -29,7 +24,7 @@ const authLink = setContext((_, {headers}) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem('id_token');
   // return the headers to the context so httpLink can read them
-  console.log(token);
+
   return {
     headers: {
       ...headers,
@@ -51,20 +46,18 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-        <GlobalStyle/>
-        <GlobalProvider>
-          {Auth.loggedIn() ? (
-            <AppContainer>
-              <Header/>
-              <Outlet/>
-            </AppContainer>
-          ) : (
-            <>
-              <LoginSignup mode={isSignUpPage ? 'signup' : 'login'}/>
-              <Footer/>
-            </>
-          )}
-        </GlobalProvider>
+      <GlobalStyle/>
+      {Auth.loggedIn() ? (
+        <AppContainer>
+          <Header/>
+          <Outlet/>
+        </AppContainer>
+      ) : (
+        <>
+          <LoginSignup mode={isSignUpPage ? 'signup' : 'login'}/>
+          <Footer/>
+        </>
+      )}
     </ApolloProvider>
   );
 }
