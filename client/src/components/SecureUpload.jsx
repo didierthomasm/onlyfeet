@@ -4,6 +4,7 @@ import { TailSpin } from 'react-loader-spinner';
 import { useMutation } from '@apollo/client';
 import { ADD_VIDEO, ADD_IMAGE } from '../utils/mutations'; 
 import { UserContext } from '../context/UserContext'; 
+import mongoose from "mongoose";
 
 const SecureUpload = () => {
   const [img, setImg] = useState(null);
@@ -54,13 +55,15 @@ const SecureUpload = () => {
       if (img && video) {
         const imgResult = await uploadFile('image');
         if (imgResult) {
+          console.log(typeof new mongoose.Types.ObjectId(user.data._id));
           await addImage({
             variables: {
               public_id: imgResult.public_id,
               secure_url: imgResult.secure_url,
+              // user: new mongoose.Types.ObjectId(user.data._id), // Using the 
               user: user.data._id, // Using the logged-in user's ID
             }
-          });
+          }).then(r=>console.log(r.data.addImage)).catch(e=>console.log(e));
         }
 
         const videoResult = await uploadFile('video');
@@ -69,6 +72,7 @@ const SecureUpload = () => {
             variables: {
               public_id: videoResult.public_id,
               secure_url: videoResult.secure_url,
+              // user:  new mongoose.Types.ObjectId(user.data._id), // Using the 
               user: user.data._id, // Using the logged-in user's ID
             }
           });

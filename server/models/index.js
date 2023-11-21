@@ -1,5 +1,7 @@
-const User = require('./User');
-const Content = require('./Content');
-const Subscription = require('./Subscription');
+const User = require('./User'),
+      Content = require('./Content'),
+      Subscription = require('./Subscription'),
+      Video = require('./Video'),
+      Image = require('./Image')
 
-module.exports = { User, Content, Subscription };
+module.exports = { User, Content, Subscription, Video, Image };

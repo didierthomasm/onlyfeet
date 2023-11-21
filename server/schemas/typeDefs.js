@@ -1,10 +1,11 @@
 const typeDefs = `
   # A scalar type for Dates
   scalar DateTime
+  scalar ObjectId
 
   # Represents a user in the system
   type User {
-    _id: ID!
+    _id: ObjectId!
     firstName: String!
     lastName: String!
     email: String!
@@ -43,7 +44,7 @@ const typeDefs = `
     folder: String
     duration: Int
     created_at: DateTime
-    user: User!
+    user: ObjectId!
   }
 
   # Represents an image in the system
@@ -57,7 +58,7 @@ const typeDefs = `
     resource_type: String
     folder: String
     created_at: DateTime
-    user: User!
+    user: ObjectId!
   }
 
   # Root query type
@@ -74,13 +75,13 @@ const typeDefs = `
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!, role: String, created_at: DateTime, credits: Int): Auth
     addSubscription(follower: ID!, creator: ID!, startDate: DateTime, endDate: DateTime, isActive: Boolean, subscriptionType: String): Subscription
-    addVideo(public_id: String!, secure_url: String!, playback_url: String, width: Int, height: Int, format: String, resource_type: String, folder: String, duration: Int, created_at: DateTime, user: ID!): Video
+    addVideo(public_id: String!, secure_url: String!, playback_url: String, width: Int, height: Int, format: String, resource_type: String, folder: String, duration: Int, created_at: DateTime, user: ObjectId!): Video
     deleteVideo(videoId: ID!): Video
-    addImage(public_id: String!, secure_url: String!, width: Int, height: Int, format: String, resource_type: String, folder: String, created_at: DateTime, user: ID!): Image
+    addImage(public_id: String!, secure_url: String!, width: Int, height: Int, format: String, resource_type: String, folder: String, created_at: DateTime, user: ObjectId!): Image
     deleteImage(imageId: ID!): Image
     login(email: String!, password: String!): Auth
     removeUser: User
   }
-`;
+`
 
 module.exports = typeDefs;

@@ -64,6 +64,14 @@ const resolvers = {
         addVideo: async (parent, { public_id, secure_url, playback_url, width, height, format, resource_type, folder, duration, created_at, user }) => {
             try {
                 const video = await Video.create({ public_id, secure_url, playback_url, width, height, format, resource_type, folder, duration, created_at, user });
+                console.log(`objectid: ${user}`);
+                await User.findById(user)
+                  .then((u) => {
+                    u.videos.push(video._id)
+                    u.save()
+                    console.log(u)
+                  })
+                  .catch((e) => console.log(e))
                 return video;
             } catch (error) {
                 throw new Error('Error adding video');
@@ -83,9 +91,15 @@ const resolvers = {
         addImage: async (parent, { public_id, secure_url, width, height, format, resource_type, folder, created_at, user }) => {
             try {
                 const image = await Image.create({ public_id, secure_url, width, height, format, resource_type, folder, created_at, user });
+                console.log(`objectid: ${user}`)
+                await User.findById(user).then(u=>{
+                    u.images.push(image._id);
+                    u.save();
+                    console.log(u);
+                }).catch(e=>console.log(e))
                 return image;
             } catch (error) {
-                throw new Error('Error adding image');
+                throw new Error(error);
             }
         },
         deleteImage: async (parent, { imageId }) => {
