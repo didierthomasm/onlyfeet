@@ -74,11 +74,6 @@ const resolvers = {
                 throw AuthenticationError;
             }
 
-/*            if (User.role !== 0 && User.role !== 1 && User.role !== 2) {
-                console.log(User.role)
-                throw AuthenticationError;
-            }*/
-
             const token = signToken(user);
             return { token, user };
         },
@@ -88,7 +83,19 @@ const resolvers = {
                 return User.findOneAndDelete({_id: context.user._id});
             }
             throw AuthenticationError;
-        }
+        },
+
+        updateUser: async (parent, {firstName, lastName, username, bio }, context) => {
+
+            if (context.user) {
+                return User.findOneAndUpdate(
+                  { _id: context.user._id },
+                  { firstName, lastName, username, bio },
+                  { new: true }
+                );
+            }
+            throw AuthenticationError;
+        },
     },
     DateTime: DateTime
 };

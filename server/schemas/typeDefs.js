@@ -11,6 +11,7 @@ scalar DateTime
     role: String        # Role of the user in the system (e.g., 'creator', 'follower')
     credits: Int        # Credits available to the user for transactions
     fullName: String    # Full name of the user (derived from first and last name)
+    bio: String         # Biography of the user
   }
 
 # Authentication data including the token and associated user
@@ -42,6 +43,7 @@ scalar DateTime
 # Root mutation type
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, username: String!, password: String!, role: String, created_at: DateTime, credits: Int): Auth
+    updateUser(firstName: String!, lastName: String!, username: String!, bio: String!): User
     addSubscription(follower: ID!, creator: ID!, startDate: DateTime, endDate: DateTime, isActive: Boolean, subscriptionType: String): Subscription
     login(email: String!, password: String!): Auth
     removeUser: User
