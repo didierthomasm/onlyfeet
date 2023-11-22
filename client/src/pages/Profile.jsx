@@ -1,12 +1,7 @@
-import {useContext, useState} from "react";
-
+import React, { useContext, useState } from "react";
 import userPlaceholder from "../assets/img/Profile+/profile-placeholder.png";
 import coverPlaceholder from "../assets/img/Profile+/cover-placeholder.png";
-
-// Context
-import {GlobalContext} from "../context/GlobalState.jsx";
-
-// Styled components for the profile
+import { GlobalContext } from "../context/GlobalState.jsx";
 import {
   BioSection,
   BioText,
@@ -18,7 +13,7 @@ import {
   ProfileInfo,
   ProfilePhoto,
   Username
-} from '../assets/style/Profile/ProfileStyle.js'
+} from '../assets/style/Profile/ProfileStyle.js';
 import EditableField from "../components/EditableField.jsx";
 
 export function Profile() {
@@ -31,13 +26,11 @@ export function Profile() {
     bio: user.bio,
   });
 
-  // Handle null profile pictures
   const profilePictures = {
     userPic: user.profilePic || userPlaceholder,
     coverPic: user.coverPic || coverPlaceholder,
-  } ;
+  };
 
-  // Handle edit button
   const handleEditToggle = () => {
     if (isEditing) {
       handleSave();
@@ -45,13 +38,11 @@ export function Profile() {
     setIsEditing(!isEditing);
   };
 
-  // Handle save button
   const handleSave = () => {
     updateProfile(editValues);
     setIsEditing(false);
   }
 
-  // Handle change in editable fields
   const handleChange = (name, value) => {
     setEditValues(prevValues => ({
       ...prevValues,
@@ -110,5 +101,5 @@ export function Profile() {
         </EditButton>
       </ProfileInfo>
     </ProfileContainer>
-  )
+  );
 }

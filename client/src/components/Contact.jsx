@@ -58,3 +58,17 @@ export function Contact() {
 }
 
 export default Contact;
+import { css } from 'styled-components';
+
+const mediaQuery = css`
+  @media (max-width: 768px) {
+    /* Add your reduced screen styles here */
+    /* For example: */
+    padding: 10px;
+    font-size: 14px;
+  }
+`;
+
+ContactContainer = styled(ContactContainer)`
+  ${mediaQuery}
+`;
