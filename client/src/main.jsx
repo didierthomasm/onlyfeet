@@ -13,7 +13,6 @@ import { Earn } from "./pages/Earn";
 import Help from "./pages/Help";
 import SecureUpload from './components/SecureUpload';
 import Upload from './components/Upload';
-import { UserProvider } from './context/UserContext'; // Import UserProvider
 
 const router = createBrowserRouter([
   {
@@ -67,8 +66,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <UserProvider> {/* Wrap the application with UserProvider */}
       <RouterProvider router={router} />
-    </UserProvider>
   </React.StrictMode>
 );

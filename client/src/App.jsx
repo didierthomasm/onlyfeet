@@ -61,6 +61,7 @@ function App() {
           </AppContainer>
         ) : (
           <LoginSignup mode={isSignUpPage ? 'signup' : 'login'}/>
+
         )}
       </Elements>
     </ApolloProvider>
