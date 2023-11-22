@@ -1,4 +1,4 @@
-const { User, Content, Subscription } = require('../models');
+const { User, Content, Subscription, Video, Image } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const {DateTime} = require("./scalar");
 
@@ -60,7 +60,23 @@ const resolvers = {
                 }
             }
             throw AuthenticationError;
-        }
+        },
+
+        videosByUser: async (parent, { userId }) => {
+            try {
+                return await Video.find({ user: userId });
+            } catch (error) {
+                throw new Error('Error fetching videos by user');
+            }
+        },
+
+        imagesByUser: async (parent, { userId }) => {
+            try {
+                return await Image.find({ user: userId });
+            } catch (error) {
+                throw new Error('Error fetching images by user');
+            }
+        },
     },
     Mutation: {
         addUser: async (parent, { firstName, lastName, email, username, password, created_at, credits }) => {
@@ -184,6 +200,44 @@ const resolvers = {
                 );
             }
             throw AuthenticationError;
+        },
+        addVideo: async (parent, { public_id, secure_url, playback_url, width, height, format, resource_type, folder, duration, created_at, user }) => {
+            try {
+                const video = await Video.create({ public_id, secure_url, playback_url, width, height, format, resource_type, folder, duration, created_at, user });
+                return video;
+            } catch (error) {
+                throw new Error('Error adding video');
+            }
+        },
+        deleteVideo: async (parent, { videoId }) => {
+            try {
+                const deletedVideo = await Video.findOneAndDelete({ _id: videoId });
+                if (!deletedVideo) {
+                    throw new Error('Video not found');
+                }
+                return deletedVideo;
+            } catch (error) {
+                throw new Error('Error deleting video');
+            }
+        },
+        addImage: async (parent, { public_id, secure_url, width, height, format, resource_type, folder, created_at, user }) => {
+            try {
+                const image = await Image.create({ public_id, secure_url, width, height, format, resource_type, folder, created_at, user });
+                return image;
+            } catch (error) {
+                throw new Error('Error adding image');
+            }
+        },
+        deleteImage: async (parent, { imageId }) => {
+            try {
+                const deletedImage = await Image.findOneAndDelete({ _id: imageId });
+                if (!deletedImage) {
+                    throw new Error('Image not found');
+                }
+                return deletedImage;
+            } catch (error) {
+                throw new Error('Error deleting image');
+            }
         },
     },
     DateTime: DateTime

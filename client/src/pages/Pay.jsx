@@ -21,7 +21,7 @@ const PayContainer = styled.div`
 `;
 
 const Message = styled.p`
-  color: ${props => props.error ? 'red' : 'green'};
+  color: ${props => props.$error ? 'red' : 'green'};
   font-size: 1rem;
 `;
 
@@ -198,7 +198,7 @@ export function Pay() {
           onChange={handleInputChange}
           value={formData.amount}
         />
-        {message && <Message error={!!error}>{message}</Message>}
+        {message && <Message $error={!!error}>{message}</Message>}
         <StyledButton type="submit" disabled={isProcessing}>
           {isProcessing ? 'Processing...' : 'Add Credits'}
         </StyledButton>

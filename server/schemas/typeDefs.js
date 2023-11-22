@@ -44,6 +44,36 @@ scalar DateTime
     isActive: Boolean   # Indicates if the subscription is currently active
     subscriptionType: String # Type of the subscription
   }
+  
+    # Represents a video in the system
+  type Video {
+    _id: ID!
+    public_id: String!
+    secure_url: String!
+    playback_url: String
+    width: Int
+    height: Int
+    format: String
+    resource_type: String
+    folder: String
+    duration: Int
+    created_at: DateTime
+    user: User!
+  }
+
+  # Represents an image in the system
+  type Image {
+    _id: ID!
+    public_id: String!
+    secure_url: String!
+    width: Int
+    height: Int
+    format: String
+    resource_type: String
+    folder: String
+    created_at: DateTime
+    user: User!
+  }
 
 # Root query type
   type Query {
@@ -55,6 +85,8 @@ scalar DateTime
     subscription(subId:ID!): Subscription # Retrieve a single subscription by ID
     contents: [Content]   # Retrieve all content
     content(contentId: ID!): Content # Retrieve a single content item by ID
+    videosByUser(userId: ID!): [Video]!
+    imagesByUser(userId: ID!): [Image]!
   }
 
 # Root mutation type
@@ -70,6 +102,10 @@ scalar DateTime
     removeCredits(userId: ID!, credits: Int!): User
     addFollower(followerId: ID!, followingId: ID!): User
     removeFollower(followerId: ID!, followingId: ID!): User
+    addVideo(public_id: String!, secure_url: String!, playback_url: String, width: Int, height: Int, format: String, resource_type: String, folder: String, duration: Int, created_at: DateTime, user: ID!): Video
+    deleteVideo(videoId: ID!): Video
+    addImage(public_id: String!, secure_url: String!, width: Int, height: Int, format: String, resource_type: String, folder: String, created_at: DateTime, user: ID!): Image
+    deleteImage(imageId: ID!): Image
   }
 `;
 
