@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "react-scripts start",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
@@ -12,8 +11,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.7",
-    "@cloudinary/react": "^1.11.2",
-    "@cloudinary/url-gen": "^1.13.0",
+    "@stripe/react-stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^2.2.0",
     "@styled-icons/bootstrap": "^10.47.0",
     "@styled-icons/boxicons-regular": "^10.47.0",
     "@styled-icons/boxicons-solid": "^10.47.0",
@@ -27,17 +26,13 @@
     "@styled-icons/material-sharp": "^10.47.0",
     "@styled-icons/remix-line": "^10.46.0",
     "axios": "^1.6.2",
-    "cloudinary-react": "^1.8.1",
-    "dotenv": "^16.3.1",
-    "graphql": "^16.8.1",
+    "graphql": "^16.6.0",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.4.5",
     "react-router-dom": "^6.11.1",
-    "react-scripts": "^5.0.1",
-    "styled-components": "^6.1.1",
-    "web-vitals": "^3.5.0"
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

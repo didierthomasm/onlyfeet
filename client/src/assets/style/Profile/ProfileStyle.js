@@ -99,3 +99,31 @@ export const StyledTextArea = styled.textarea`
   height: 5rem;
   max-width: 600px;
 `;
+
+export const ImageInput = styled.input`
+  display: block;
+  margin: 10px 0;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+`;
+
+export const ImagePreview = styled.div`
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #333;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+`;

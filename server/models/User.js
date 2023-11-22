@@ -18,15 +18,20 @@ const userSchema = new Schema({
     unique: true,
     match: [/.+@.+\..+/, 'Must match an email address!'],
   },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true
+  },
+  bio: {
+    type: String,
+    maxlength: 280
+  },
   password: {
     type: String,
     required: true,
     minlength: 8
-  },
-  role: {
-    type: String,
-    required: false,
-    enum: ['creator', 'follower'], default: 'follower'
   },
   created_at: {
     type: Date,
@@ -36,30 +41,30 @@ const userSchema = new Schema({
     type: Number,
     default: 0
   },
-  videos: [
+  followers: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Video' // Assuming you have a Video model
+      ref: 'User'
     }
   ],
-  images: [
+  following: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Image' // Assuming you have an Image model
+      ref: 'User'
+    }
+  ],
+  subscribedTo: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Subscription'
+    }
+  ],
+  content: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Content'
     }
   ]
-  // subscribedTo: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Subscription'
-  //   }
-  // ],
-  // content: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Content'
-  //   }
-  // ]
 },
   {
     toJSON: {
@@ -70,6 +75,10 @@ const userSchema = new Schema({
   }
 );
 
+userSchema.virtual('fullName').get(function () {
+  return `${this.firstName} ${this.lastName}`;
+});
+
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 5;
@@ -79,10 +88,7 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.methods.isCorrectPassword = async function (password) {
-  const isMatch = await bcrypt.compare(password, this.password);
-  // Log the comparison result
-  //console.log(`Password comparison result: ${isMatch}`);
-  return isMatch;
+  return await bcrypt.compare(password, this.password);
 };
 
 const User = model('User', userSchema);

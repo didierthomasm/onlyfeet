@@ -1,28 +1,51 @@
-import { gql } from '@apollo/client';
+import {gql} from '@apollo/client';
 
-export const QUERY_USERS = gql`
-query allUsers{
-  users {
-    _id
-    firstName
-    lastName
-    email
-    role
-    credits
-  }
-}
-`;
-
-export const QUERY_SINGLE_USER = gql`
+export const QUERY_USER = gql`
   query user($userId: ID!) {
     user(userId: $userId) {
       _id
+      username
       firstName
       lastName
+      fullName
+      bio
       email
-      role
-      credits
-      subscribedTo
+      followers {
+        _id
+        
+      },
+      following {
+        _id
+        
+      }
+    }
+  }
+`;
+
+export const QUERY_USERS = gql`
+  query users {
+    users {
+      _id
+      username
+      firstName
+      lastName
+      fullName
+      bio
+      email
+    }
+  }
+`;
+
+export const SEARCH_USERS = gql`
+  query searchUsers($searchTerm: String) {
+    searchUsers(searchTerm: $searchTerm) {
+      _id
+      username
+      firstName
+      lastName
+      fullName
+      bio
+      email
     }
   }
 `;
@@ -31,16 +54,24 @@ export const QUERY_ME = gql`
   query me {
     me {
       _id
+      username
       firstName
       lastName
+      fullName
+      bio
       email
-      role
       credits
-      subscribedTo
+      followers {
+        _id
+        
+      },
+      following {
+        _id
+        
+      }
     }
   }
 `;
-
 
 // Query for fetching videos by a specific user
 export const QUERY_VIDEOS_BY_USER = gql`

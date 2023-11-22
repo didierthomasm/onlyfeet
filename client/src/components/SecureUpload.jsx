@@ -1,16 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from 'axios';
 import { TailSpin } from 'react-loader-spinner';
 import { useMutation } from '@apollo/client';
-import { ADD_VIDEO, ADD_IMAGE } from '../utils/mutations'; 
-import { UserContext } from '../context/UserContext'; 
+import { ADD_VIDEO, ADD_IMAGE } from '../utils/mutations';
+import Auth from "../utils/auth.js";
+
 
 const SecureUpload = () => {
   const [img, setImg] = useState(null);
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const { user } = useContext(UserContext);
+  const { user } = Auth.loggedIn();
   console.log("User from context:", user);
 
   const [addVideo] = useMutation(ADD_VIDEO);
