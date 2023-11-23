@@ -3,9 +3,9 @@ import {Eye, EyeClose} from '@styled-icons/remix-line';
 
 import {Link} from "react-router-dom";
 import {useMutation} from '@apollo/client';
-import {LOGIN_USER} from '../utils/mutations';
+import {LOGIN_USER} from '../../utils/mutations.js';
 
-import Auth from '../utils/auth';
+import Auth from '../../utils/auth.js';
 
 import {
   Button,
@@ -24,7 +24,7 @@ import {
   PasswordInput,
   Title,
   TogglePasswordVisibility
-} from "../assets/style/Login-Signup-Forms/Login-SingupStyle.js";
+} from "../../assets/style/Login-Signup-Forms/Login-SingupStyle.js";
 
 export function LoginForm() {
   // State hooks for input values

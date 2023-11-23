@@ -1,11 +1,11 @@
 import {useState} from 'react';
 
 import { useMutation } from '@apollo/client';
-import { UPDATE_USER } from '../utils/mutations';
-import { QUERY_ME } from '../utils/queries';
+import { UPDATE_USER } from '../../utils/mutations.js';
+import { QUERY_ME } from '../../utils/queries.js';
 
-import EditableField from '../components/EditableField.jsx';
-import {Name, Username, BioSection, EditButton, Icon, BioText, ImagePreview, ImageInput} from '../assets/style/Profile/ProfileStyle.js';
+import EditableField from './EditableField.jsx';
+import {Name, Username, BioSection, EditButton, Icon, BioText, ImagePreview, ImageInput} from '../../assets/style/Profile/ProfileStyle.js';
 
 export function ProfileEdit({ profile, setIsEditing }) {
   const [editValues, setEditValues] = useState({

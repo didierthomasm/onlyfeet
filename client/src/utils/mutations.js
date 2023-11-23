@@ -75,6 +75,23 @@ mutation removeCredits($userId: ID!, $credits: Int!) {
 }
 `;
 
+
+export const ADD_CONTENT = gql`
+mutation addContent($creator: ID!, $title: String!, $description: String, $price: Int, $contentType: String, $datePosted: DateTime) {
+    addContent(creator: $creator, title: $title, description: $description, price: $price, contentType: $contentType, datePosted: $datePosted) {
+        title
+        description
+        price
+        contentType
+        datePosted
+        creator {
+        _id
+        }
+    }
+    }
+`;
+
+
 /*export const ADD_POST = gql`
 mutation addPost($postText: String!) {
   addPost(postText: $postText) {

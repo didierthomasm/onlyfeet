@@ -2,10 +2,10 @@ import {NavLink} from "react-router-dom";
 import React, {useId} from "react";
 
 // Utils for authentication
-import Auth from '../utils/auth.js';
+import Auth from '../../utils/auth.js';
 
 // Styles
-import Nav from '../assets/style/Header-Navbar/NavbarStyle.js'
+import Nav from '../../assets/style/Header-Navbar/NavbarStyle.js'
 
 // Icons
 import {Person, PersonFill, PiggyBank as Earn, PiggyBankFill as EarnFill} from '@styled-icons/bootstrap/';

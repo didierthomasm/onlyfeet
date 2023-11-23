@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 
 // Items for creating a new user
 import {useMutation} from "@apollo/client";
-import {ADD_USER} from "../utils/mutations";
-import Auth from '../utils/auth';
+import {ADD_USER} from "../../utils/mutations.js";
+import Auth from '../../utils/auth.js';
 
 // Checkbox element for terms and conditions
 import TermsCheckbox from "./TermsCheckbox.jsx";
@@ -21,7 +21,7 @@ import {
   PasswordInput,
   Title,
   TogglePasswordVisibility,
-} from "../assets/style/Login-Signup-Forms/Login-SingupStyle.js";
+} from "../../assets/style/Login-Signup-Forms/Login-SingupStyle.js";
 
 export function SignupForm() {
   // State hooks for input values

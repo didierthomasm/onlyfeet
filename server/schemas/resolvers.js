@@ -93,11 +93,11 @@ const resolvers = {
             return { token, subscription };
         },
 
-        addContent: async (parent, { creator, title, description, price, type, url, created_at }) => {
-            const content = await Content.create({ creator, title, description, price, type, url, created_at });
-            const token = signToken(content);
-
-            return { token, content };
+        addContent: async (parent, { creator, title, description, price, contentType, datePosted }) => {
+            const content = await Content.create({ creator, title, description, price, contentType, datePosted });
+            // const token = signToken(content);
+            // return { token, content };
+            return content;
         },
 
         addCredits: async (parent, {userId, credits}, context) => {
@@ -213,7 +213,7 @@ const resolvers = {
             try {
                 const deletedVideo = await Video.findOneAndDelete({ _id: videoId });
                 if (!deletedVideo) {
-                    throw new Error('Video not found');
+                    new Error('Video not found');
                 }
                 return deletedVideo;
             } catch (error) {

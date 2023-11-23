@@ -127,3 +127,37 @@ export const ImagePreview = styled.div`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 `;
+
+// Container for name and edit button
+export const NameEditContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+`;
+
+// Container for tabs
+export const TabsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+`;
+
+// Individual tab button
+export const TabButton = styled.button`
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 3px solid transparent;
+  background-color: ${({ $active }) => ($active ? '#e4e4e4' : 'none')};
+  border-bottom: ${({ $active }) => ($active ? '3px solid #007bff' : '3px solid transparent')};
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+`;

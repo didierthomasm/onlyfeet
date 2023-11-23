@@ -1,5 +1,5 @@
 import {useQuery} from '@apollo/client';
-import {QUERY_ME} from '../utils/queries';
+import {QUERY_ME} from '../../utils/queries.js';
 import styled from "styled-components";
 
 const UserInfoContainer = styled.div`

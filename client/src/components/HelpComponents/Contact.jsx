@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { ContactContainer, Title, ContactForm, Input, TextArea, Button } from '../assets/style/Help-Contact/ContactStyle.js';
+import { ContactContainer, Title, ContactForm, Input, TextArea, Button } from '../../assets/style/Help-Contact/ContactStyle.js';
 
 export function Contact() {
   const [formData, setFormData] = useState({

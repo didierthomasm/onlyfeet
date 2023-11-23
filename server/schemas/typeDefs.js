@@ -31,7 +31,7 @@ scalar DateTime
     description: String # Description of the content
     price: Int          # Price of the content
     type: String        # Type of content (e.g., 'video', 'audio', 'text')
-    created_at: DateTime # Date the content was created
+    datePosted: DateTime # Date the content was created
   }
 
 # A subscription made by a follower to a creator
@@ -96,7 +96,7 @@ scalar DateTime
     addSubscription(follower: ID!, creator: ID!, startDate: DateTime, endDate: DateTime, isActive: Boolean, subscriptionType: String): Subscription
     login(email: String!, password: String!): Auth
     removeUser: User
-    addContent(creator: ID!, title: String!, description: String, price: Int, type: String, url: String, created_at: DateTime): Content
+    addContent(creator: ID!, title: String!, description: String, price: Int, contentType: String, datePosted: DateTime): Content
     removeContent(contentId: ID!): Content
     addCredits(userId: ID!, credits: Int!): User
     removeCredits(userId: ID!, credits: Int!): User

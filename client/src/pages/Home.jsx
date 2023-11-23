@@ -8,7 +8,6 @@ import {UserInfo} from "../components/HomeComponents/UserInfo.jsx";
 import {SearchBar} from "../components/HomeComponents/SearchBar.jsx";
 
 
-
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
