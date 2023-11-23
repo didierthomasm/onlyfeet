@@ -5,7 +5,7 @@ import React from 'react';
 import { HelpContainer, SectionTitle, Section } from '../assets/style/Help-Contact/HelpStyle.js';
 
 // Import the Contact component
-import Contact from '../components/Contact.jsx';
+import Contact from '../components/HelpComponents/Contact.jsx';
 
 export function Help() {
   return (
