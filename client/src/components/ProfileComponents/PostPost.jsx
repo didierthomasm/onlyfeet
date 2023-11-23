@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation } from "@apollo/client";
-import { ADD_CONTENT } from "../../utils/mutations.js";
+
 import styled from 'styled-components';
 
 const PostForm = styled.form`
@@ -29,12 +28,11 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-export const PostContent = ({ userId, onPostSubmit }) => {
-    const [addContent, { error }] = useMutation(ADD_CONTENT);
+export const PostPost = ({ userId, onPostSubmit }) => {
+
     const [formState, setFormState] = useState({
         title: '',
         description: '',
-        price: 0,
     });
 
 
@@ -44,9 +42,6 @@ export const PostContent = ({ userId, onPostSubmit }) => {
         const formVariables = {
             ...formState,
             creator: userId,
-            price: parseInt(formState.price, 10),
-            datePosted: new Date().toISOString(), // Make sure to send the date in ISO format
-            contentType: 'text',
         };
         try {
             // const { data } = await addContent({
@@ -59,11 +54,11 @@ export const PostContent = ({ userId, onPostSubmit }) => {
             setFormState({
                 title: '',
                 description: '',
-                price: 0,
+
             });
 
         } catch (err) {
-            console.error('Error adding content', err);
+            console.error('Error adding post', err);
         }
     };
 
@@ -89,16 +84,7 @@ export const PostContent = ({ userId, onPostSubmit }) => {
                 onChange={handleChange}
                 placeholder="What's on your mind?"
             />
-            <TextInput
-                name="price"
-                type='number'
-                value={formState.price}
-                onChange={handleChange}
-                placeholder="Price"
-            />
             <SubmitButton type="submit">Post</SubmitButton>
-            {/* Display error if mutation fails */}
-            {error && <p>Error posting content: {error.message}</p>}
         </PostForm>
     );
 };

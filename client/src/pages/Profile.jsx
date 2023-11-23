@@ -33,6 +33,7 @@ import {ProfileEdit} from "../components/ProfileComponents/ProfileEdit.jsx";
 import FollowButtonComponent from "../components/ProfileComponents/FollowButton.jsx";
 import {ContentFeed} from "../components/ProfileComponents/ContentFeed.jsx";
 import {PostContent} from "../components/ProfileComponents/PostContent.jsx";
+import {PostPost} from "../components/ProfileComponents/PostPost.jsx";
 
 import Auth from "../utils/auth.js";
 
@@ -154,7 +155,7 @@ export function Profile() {
                     </>
                 )}
                 {showTabs && activeTab === 'posts' && (
-                    <div>Posts Tab Data</div>
+                    <PostPost />
                 )}
               </>
           )}
