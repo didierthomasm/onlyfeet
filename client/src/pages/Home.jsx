@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
+import {useState} from "react";
+import {useQuery} from "@apollo/client";
+import {Link} from "react-router-dom";
+import {SEARCH_USERS} from "../utils/queries";
 import styled from 'styled-components';
-import { SEARCH_USERS } from "../utils/queries";
 
+import {UserInfo} from "../components/HomeComponents/UserInfo.jsx";
+import {SearchBar} from "../components/HomeComponents/SearchBar.jsx";
 
-import { UserInfo } from "../components/UserInfo.jsx";
-import { SearchBar } from "../components/SearchBar.jsx";
 
 
 const HomeContainer = styled.div`
@@ -15,6 +15,10 @@ const HomeContainer = styled.div`
   align-items: center;
   width: 85vw;
   height: 100%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const DropdownContainer = styled.div`

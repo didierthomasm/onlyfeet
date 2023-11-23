@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { LoginForm } from "../components/LoginForm.jsx";
+import {LoginForm} from "../components/LoginSignupComponents/LoginForm.jsx";
+import {SignupForm} from "../components/LoginSignupComponents/SignupForm.jsx";
 import logo from "../assets/img/Logos/logo-letters.png";
-import { SignupForm } from "../components/SignupForm.jsx";
-
 
 const MainContainer = styled.div`
   display: grid;
@@ -29,20 +28,20 @@ const Slogan = styled.h2`
   margin-bottom: 20px;
 `;
 
-export function LoginSignup({ setIsLoggedIn, mode }) {
+export function LoginSignup({setIsLoggedIn, mode}) {
   const isSignUp = mode === 'signup';
   //console.log(setIsLoggedIn)
   return (
     <>
       <MainContainer>
         {/*<div>*/}
-        <Image src={logo} />
+        <Image src={logo}/>
         {/*<Slogan>"Step into Style:<br/> Where Every Footprint Tells a Story"</Slogan>*/}
         {/*</div>*/}
         {isSignUp ? (
-          <SignupForm setIsLoggedIn={setIsLoggedIn} />
+          <SignupForm setIsLoggedIn={setIsLoggedIn}/>
         ) : (
-          <LoginForm setIsLoggedIn={setIsLoggedIn} />
+          <LoginForm setIsLoggedIn={setIsLoggedIn}/>
         )}
       </MainContainer>
     </>
