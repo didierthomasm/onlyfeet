@@ -37,8 +37,8 @@ export function Footer() {
   return (
     <FooterContainer>
       <FooterLinks>
-        <a href="/client/src/components/Contact">Contact</a>
-        <a href="/help">Help</a>
+        <a href="/client/src/components/HelpComponents/Contact">Contact</a>
+        <a href="/client/src/pages/Help">Help</a>
         <a href="/about">About</a>
         <a href="/store">Store</a>
         <a href="/terms-of-service">Terms of Service</a>

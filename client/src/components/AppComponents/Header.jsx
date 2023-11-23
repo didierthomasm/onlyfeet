@@ -1,4 +1,4 @@
-import logo from '../assets/img/Logos/logo-letters.png'
+import logo from '../../assets/img/Logos/logo-letters.png'
 import {Navbar} from "./Navbar.jsx";
 import styled from "styled-components";
 
