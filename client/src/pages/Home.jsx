@@ -14,6 +14,10 @@ const HomeContainer = styled.div`
   align-items: center;
   width: 85vw;
   height: 100%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const DropdownContainer = styled.div`
