@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckboxContainer, CheckboxLabel, StyledCheckbox, ShowMoreText} from '../assets/style/Login-Signup-Forms/CheckboxStyle.js'
+import { CheckboxContainer, CheckboxLabel, StyledCheckbox, ShowMoreText} from '../../assets/style/Login-Signup-Forms/CheckboxStyle.js'
 
 const TermsCheckbox = ({termsAndConditions ,setTermsAndConditions}) => {
   // const [termsAndConditions, setTermsAndConditions] = useState(false);

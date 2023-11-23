@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import {LoginForm} from "../components/LoginForm.jsx";
-import {SignupForm} from "../components/SignupForm.jsx";
+import {LoginForm} from "../components/LoginSignupComponents/LoginForm.jsx";
+import {SignupForm} from "../components/LoginSignupComponents/SignupForm.jsx";
 import logo from "../assets/img/Logos/logo-letters.png";
 
 const MainContainer = styled.div`
