@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledInput, StyledTextArea } from '../assets/style/Profile/ProfileStyle';
+import { StyledInput, StyledTextArea } from '../../assets/style/Profile/ProfileStyle.js';
 
 const EditableField = ({ isEditing, value, onChange, name, placeholder, DisplayComponent, isTextArea = false }) => {
   if (isEditing) {

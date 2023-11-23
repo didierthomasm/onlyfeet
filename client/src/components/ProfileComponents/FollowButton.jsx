@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_FOLLOWER } from '../utils/mutations';
-import { QUERY_ME } from '../utils/queries';
-import Auth from '../utils/auth';
-import { FollowButtonStyled, AddIcon, RemoveIcon } from '../assets/style/Profile/FollowButtonStyle.js';
+import { ADD_FOLLOWER } from '../../utils/mutations.js';
+import { QUERY_ME } from '../../utils/queries.js';
+import Auth from '../../utils/auth.js';
+import { FollowButtonStyled, AddIcon, RemoveIcon } from '../../assets/style/Profile/FollowButtonStyle.js';
 
 const FollowButtonComponent = ({ userIdToFollow, isAlreadyFollowing }) => {
   const currentUserId = Auth.loggedIn() ? Auth.getProfile().data._id : null;

@@ -22,12 +22,17 @@ import {
   ProfileContainer,
   ProfileInfo,
   ProfilePhoto,
-  Username
+  Username,
+  TabsContainer,
+  TabButton,
+  NameEditContainer
 } from '../assets/style/Profile/ProfileStyle.js'
 
 // Component ProfileEdit
-import {ProfileEdit} from "../components/ProfileEdit.jsx";
-import FollowButtonComponent from  "../components/FollowButton.jsx";
+import {ProfileEdit} from "../components/ProfileComponents/ProfileEdit.jsx";
+import FollowButtonComponent from "../components/ProfileComponents/FollowButton.jsx";
+import {ContentFeed} from "../components/ProfileComponents/ContentFeed.jsx";
+import {PostContent} from "../components/ProfileComponents/PostContent.jsx";
 
 import Auth from "../utils/auth.js";
 
@@ -56,8 +61,26 @@ export function Profile() {
     }
   }, [data]);
 
+  // Handle tab click
+  const [activeTab, setActiveTab] = useState('content');
+
+  // Add a new state for managing the list of contents
+  const [contents, setContents] = useState([]);
+
+  // Handle tab click
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
+  // Function to handle new post submissions
+  const handlePostSubmit = (newContent) => {
+    // Update the contents state to include the new content
+    setContents([...contents, newContent]);
+  };
+
   // Only show edit button if the logged-in user is viewing their own profile
   const showEditButton = effectiveProfileId === loggedInUserId;
+  const showTabs = showEditButton;
 
   // Use React Router's `<Navigate />` component to redirect to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data._id === profileId) {
@@ -84,28 +107,58 @@ export function Profile() {
   }
 
   return (
-    <ProfileContainer>
-      <CoverPhoto src={profilePictures.coverPic} alt='Cover'/>
-      <ProfilePhoto src={profilePictures.userPic} alt="Profile"/>
-      <ProfileInfo>
-        <FollowButtonComponent userIdToFollow={profile._id} isAlreadyFollowing={isAlreadyFollowing} />
-        {isEditing ? (
-          <ProfileEdit profile={profile} setIsEditing={setIsEditing}/>
-        ) : (
-          <>
-            <Name>{`${profile.fullName} `}</Name>
-            <Username>{profile.username}</Username>
-            <BioSection>
-              <BioText>{profile.bio}</BioText>
-            </BioSection>
-            {showEditButton && (
-              <EditButton onClick={() => setIsEditing(true)}>
-                <Icon /> Edit Profile
-              </EditButton>
-            )}
-          </>
-        )}
-      </ProfileInfo>
-    </ProfileContainer>
+      <ProfileContainer>
+        <CoverPhoto src={profilePictures.coverPic} alt='Cover'/>
+        <ProfilePhoto src={profilePictures.userPic} alt="Profile"/>
+        <ProfileInfo>
+          <FollowButtonComponent userIdToFollow={profile._id} isAlreadyFollowing={isAlreadyFollowing} />
+          {isEditing ? (
+              <ProfileEdit profile={profile} setIsEditing={setIsEditing}/>
+          ) : (
+              <>
+                <NameEditContainer>
+                  <div>
+                    <Name>{`${profile.fullName} `}</Name>
+                    <Username>@{profile.username}</Username>
+                  </div>
+                  {showEditButton && (
+                      <EditButton onClick={() => setIsEditing(true)}>
+                        <Icon /> Edit Profile
+                      </EditButton>
+                  )}
+                </NameEditContainer>
+                <BioSection>
+                  <BioText>{profile.bio}</BioText>
+                </BioSection>
+                {showTabs && (
+                <TabsContainer>
+                  <TabButton
+                      onClick={() => handleTabClick('content')}
+                      $active={activeTab === 'content'}
+                  >
+                    Content
+                  </TabButton>
+                  <TabButton
+                      onClick={() => handleTabClick('posts')}
+                      $active={activeTab === 'posts'}
+                  >
+                    Posts
+                  </TabButton>
+                </TabsContainer>
+                )}
+                {/* Conditional rendering based on showTabs and activeTab state */}
+                {showTabs && activeTab === 'content' && (
+                    <>
+                      <PostContent userId={loggedInUserId} onPostSubmit={handlePostSubmit} />
+                      <ContentFeed contents={contents} />
+                    </>
+                )}
+                {showTabs && activeTab === 'posts' && (
+                    <div>Posts Tab Data</div>
+                )}
+              </>
+          )}
+        </ProfileInfo>
+      </ProfileContainer>
   );
 }
