@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
-import { SEARCH_USERS } from "../utils/queries";
+import {useState} from "react";
+import {useQuery} from "@apollo/client";
+import {Link} from "react-router-dom";
+import {SEARCH_USERS} from "../utils/queries";
 import styled from 'styled-components';
 
-import { UserInfo } from "../components/UserInfo.jsx";
-import { SearchBar } from "../components/SearchBar.jsx";
+import {UserInfo} from "../components/HomeComponents/UserInfo.jsx";
+import {SearchBar} from "../components/HomeComponents/SearchBar.jsx";
+
 
 
 const HomeContainer = styled.div`
