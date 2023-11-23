@@ -1,6 +1,8 @@
 # onlyfeet
 
-Welcome to *onlyfeet* - the premier platform for buying and selling feet photos online. Our secure and user-friendly service allows content creators (sellers) to connect with buyers, offering both subscription-based access and personalized photo requests!!!!!
+Welcome to *onlyfeet* - the premier platform for buying and selling feet photos online. 
+Our secure and user-friendly service allows content creators (sellers) to connect with buyers, 
+offering both subscription-based access and personalized photo requests
 
 <img src="./client/src/assets/img/Logos/logo-letters-bgwhite.png" alt="logo">
 
