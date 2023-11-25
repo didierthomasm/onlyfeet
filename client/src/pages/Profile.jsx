@@ -150,7 +150,7 @@ export function Profile() {
                 {/* Conditional rendering based on showTabs and activeTab state */}
                 {showTabs && activeTab === 'content' && (
                     <>
-                      <PostContent userId={loggedInUserId} onPostSubmit={handlePostSubmit} />
+                      <PostContent userId={loggedInUserId} onPostSubmit={handlePostSubmit}  />
                       <ContentFeed contents={contents} />
                     </>
                 )}

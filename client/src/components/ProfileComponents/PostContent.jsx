@@ -38,23 +38,22 @@ export const PostContent = ({ userId, onPostSubmit }) => {
     });
 
 
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
         const formVariables = {
             ...formState,
             creator: userId,
             price: parseInt(formState.price, 10),
-            datePosted: new Date().toISOString(), // Make sure to send the date in ISO format
-            contentType: 'text',
         };
-        try {
-            // const { data } = await addContent({
-            //     variables: formVariables,
-            // });
 
-            // onPostSubmit(data.addContent);
-            console.log(formVariables);
+        try {
+            const { data } = await addContent({
+                variables: formVariables,
+            });
+
+            onPostSubmit(data.addContent);
+
             // Clear the form or navigate away upon successful submission
             setFormState({
                 title: '',
@@ -64,6 +63,7 @@ export const PostContent = ({ userId, onPostSubmit }) => {
 
         } catch (err) {
             console.error('Error adding content', err);
+            error && console.log(error.message);
         }
     };
 
