@@ -30,7 +30,7 @@ scalar DateTime
     title: String!      # Title of the content
     description: String # Description of the content
     price: Int          # Price of the content
-    type: String        # Type of content (e.g., 'video', 'audio', 'text')
+    contentType: String        # Type of content (e.g., 'video', 'audio', 'text')
     datePosted: DateTime # Date the content was created
   }
 

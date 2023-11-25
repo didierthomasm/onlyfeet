@@ -16,7 +16,7 @@ const resolvers = {
             try {
                 if (searchTerm) {
                     return await User.find({
-                        // Assuming you want to search by username
+                        // Search by username
                         username: { $regex: searchTerm, $options: 'i' }
                     });
                 } else {
@@ -35,6 +35,27 @@ const resolvers = {
             }
         },
 
+        me: async (parent, args, context) => {
+            if (context.user) {
+                try {
+                    // First, find the user by their ID
+                    const userQuery = User.findOne({ _id: context.user._id });
+
+                    // Populate the necessary fields
+                    userQuery.populate('followers');
+                    userQuery.populate('following');
+                    userQuery.populate('content');
+
+                    // Finally, execute the query and return the result
+                    return await userQuery.exec();
+                } catch (error) {
+                    console.error('Error fetching current user:', error);
+                    throw new Error('Error fetching current user');
+                }
+            }
+            throw AuthenticationError;
+        },
+
         subscriptions: async () => {
             try {
                 return await Subscription.find();
@@ -49,17 +70,6 @@ const resolvers = {
             } catch (error) {
                 throw new Error('Error fetching user');
             }
-        },
-
-        me: async (parent, args, context) => {
-            if (context.user) {
-                try {
-                    return await User.findOne({ _id: context.user._id });
-                } catch (error) {
-                    throw new Error('Error fetching current user');
-                }
-            }
-            throw AuthenticationError;
         },
 
         videosByUser: async (parent, { userId }) => {
@@ -94,10 +104,30 @@ const resolvers = {
         },
 
         addContent: async (parent, { creator, title, description, price, contentType, datePosted }) => {
-            const content = await Content.create({ creator, title, description, price, contentType, datePosted });
-            // const token = signToken(content);
-            // return { token, content };
-            return content;
+            try {
+                // Check if the user exists
+                const userExists = await User.findById(creator);
+                if (!userExists) {
+                    new Error('User not found');
+                }
+
+                // Create the content
+                const content = await Content.create({ creator, title, description, price, contentType, datePosted });
+
+                // Update the User document by adding the new content's ID to the content array
+                await User.findByIdAndUpdate(
+                  creator,
+                  { $push: { content: content._id } },
+                  { new: true, useFindAndModify: false }
+                );
+
+                // Return the created content
+                return content;
+            } catch (error) {
+                // Handle any errors that occur during the process
+                console.error('Error adding content:', error);
+                throw new Error('Error adding content');
+            }
         },
 
         addCredits: async (parent, {userId, credits}, context) => {

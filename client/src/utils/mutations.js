@@ -84,9 +84,7 @@ mutation addContent($creator: ID!, $title: String!, $description: String, $price
         price
         contentType
         datePosted
-        creator {
-        _id
-        }
+        creator 
     }
     }
 `;

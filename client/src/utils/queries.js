@@ -12,11 +12,13 @@ export const QUERY_USER = gql`
       email
       followers {
         _id
-        
-      },
+        fullName
+        username        
+      }
       following {
         _id
-        
+        fullName
+        username
       }
     }
   }
@@ -63,11 +65,19 @@ export const QUERY_ME = gql`
       credits
       followers {
         _id
-        
-      },
+        fullName
+        username        
+      }
       following {
         _id
-        
+        fullName
+        username
+      }
+      content {
+        _id
+        title
+        description
+        price
       }
     }
   }
