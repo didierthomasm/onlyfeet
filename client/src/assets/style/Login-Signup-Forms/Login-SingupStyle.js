@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {above, below} from "../Breakpoints.js";
 
 export const MainWrapper = styled.div`
   display: flex;
@@ -6,6 +7,10 @@ export const MainWrapper = styled.div`
   align-items: center;
   gap: 20px;
   padding: 20px;
+  ${above.lg`
+    position: relative;
+    right: 10px;
+  `}
 `;
 
 export const Form = styled.form`
@@ -17,6 +22,21 @@ export const Form = styled.form`
   padding: 20px;
   border: 1px solid #CCC;
   border-radius: 5px;
+  ${above.mm`
+    width: 235px;
+  `}
+
+  ${above.sm`
+    width: 250px;
+  `}
+
+  ${above.md`
+    width: 270px;
+  `}
+
+  ${above.lg`
+    width: 300px;
+  `}
 `;
 
 export const Title = styled.h4`
@@ -32,6 +52,7 @@ export const Input = styled.input`
 export const PasswordInput = styled(Input)`
   flex-grow: 1;
   border: none;
+
   &:focus {
     outline: none;
   }
@@ -61,6 +82,7 @@ export const Button = styled.button`
   background-color: #007BFF;
   color: white;
   cursor: pointer;
+
   &:disabled {
     background-color: #CCC;
     cursor: default;
@@ -76,17 +98,23 @@ export const NotLoggedIn = styled.div`
 
 export const NotLoggedInSpan = styled.span`
   color: cornflowerblue;
+
   span {
     color: #333;
   }
+
   a {
     color: cornflowerblue;
     text-decoration: none;
     cursor: pointer;
+
     &:hover {
       text-decoration: underline;
     }
   }
+  ${below.sm`
+    font-size: .9rem;
+  `}
 `;
 
 export const ButtonLink = styled.button`
@@ -96,9 +124,14 @@ export const ButtonLink = styled.button`
   text-decoration: none;
   cursor: pointer;
   font-size: 1rem;
+
   &:hover {
     text-decoration: underline;
   }
+  ${below.sm`
+    font-size: .9rem;
+  `}
+  
 `;
 
 export const ModalBackdrop = styled.div`
